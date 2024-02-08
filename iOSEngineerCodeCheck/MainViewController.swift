@@ -21,6 +21,7 @@ class MainViewController: UITableViewController, UISearchBarDelegate {
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         task?.cancel()
+        task = nil
     }
 
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
