@@ -49,8 +49,8 @@ class MainViewController: UITableViewController, UISearchBarDelegate {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "Detail" {
-            let dtl = segue.destination as! DetailViewController
-            dtl.vc1 = self
+            let detail = segue.destination as! DetailViewController
+            detail.vc1 = self
         }
     }
 
@@ -62,9 +62,9 @@ class MainViewController: UITableViewController, UISearchBarDelegate {
         -> UITableViewCell
     {
         let cell = UITableViewCell()
-        let rp = repositories[indexPath.row]
-        cell.textLabel?.text = rp["full_name"] as? String ?? ""
-        cell.detailTextLabel?.text = rp["language"] as? String ?? ""
+        let repository = repositories[indexPath.row]
+        cell.textLabel?.text = repository["full_name"] as? String ?? ""
+        cell.detailTextLabel?.text = repository["language"] as? String ?? ""
         cell.tag = indexPath.row
         return cell
 
