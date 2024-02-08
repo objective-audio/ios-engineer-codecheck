@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		B636A8F12B749DD40084CD0A /* GitHubRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B636A8F02B749DD40084CD0A /* GitHubRepository.swift */; };
+		B636A8F32B74AA9A0084CD0A /* ImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B636A8F22B74AA9A0084CD0A /* ImageDownloader.swift */; };
 		BF0A658D244F2A3B00280FA6 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0A658C244F2A3B00280FA6 /* DetailViewController.swift */; };
 		BFD945DF244DC5E80012785A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD945DE244DC5E80012785A /* AppDelegate.swift */; };
 		BFD945E1244DC5E80012785A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD945E0244DC5E80012785A /* SceneDelegate.swift */; };
@@ -39,6 +40,7 @@
 /* Begin PBXFileReference section */
 		B636A8EE2B748B720084CD0A /* UnitTest.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = UnitTest.xctestplan; sourceTree = "<group>"; };
 		B636A8F02B749DD40084CD0A /* GitHubRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubRepository.swift; sourceTree = "<group>"; };
+		B636A8F22B74AA9A0084CD0A /* ImageDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDownloader.swift; sourceTree = "<group>"; };
 		BF0A658C244F2A3B00280FA6 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		BFD945DB244DC5E80012785A /* iOSEngineerCodeCheck.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSEngineerCodeCheck.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFD945DE244DC5E80012785A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -110,6 +112,7 @@
 				BFD945E2244DC5E80012785A /* MainViewController.swift */,
 				BF0A658C244F2A3B00280FA6 /* DetailViewController.swift */,
 				B636A8F02B749DD40084CD0A /* GitHubRepository.swift */,
+				B636A8F22B74AA9A0084CD0A /* ImageDownloader.swift */,
 				BFD945E4244DC5E80012785A /* Main.storyboard */,
 				BFD945E7244DC5EB0012785A /* Assets.xcassets */,
 				BFD945E9244DC5EB0012785A /* LaunchScreen.storyboard */,
@@ -293,6 +296,7 @@
 				BF0A658D244F2A3B00280FA6 /* DetailViewController.swift in Sources */,
 				B636A8F12B749DD40084CD0A /* GitHubRepository.swift in Sources */,
 				BFD945DF244DC5E80012785A /* AppDelegate.swift in Sources */,
+				B636A8F32B74AA9A0084CD0A /* ImageDownloader.swift in Sources */,
 				BFD945E1244DC5E80012785A /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
