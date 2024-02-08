@@ -31,7 +31,7 @@ class DetailViewController: UIViewController {
 
         if let owner = repository["owner"] as? [String: Any] {
             if let imageURL = owner["avatar_url"] as? String {
-                URLSession.shared.dataTask(with: URL(string: imageURL)!) { (data, res, err) in
+                URLSession.shared.dataTask(with: URL(string: imageURL)!) { (data, _, _) in
                     let image = UIImage(data: data!)!
                     DispatchQueue.main.async {
                         self.imageView.image = image

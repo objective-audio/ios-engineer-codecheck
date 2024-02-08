@@ -32,7 +32,7 @@ class MainViewController: UITableViewController, UISearchBarDelegate {
 
         if word.count != 0 {
             url = "https://api.github.com/search/repositories?q=\(word!)"
-            task = URLSession.shared.dataTask(with: URL(string: url)!) { (data, res, err) in
+            task = URLSession.shared.dataTask(with: URL(string: url)!) { (data, _, _) in
                 if let obj = try! JSONSerialization.jsonObject(with: data!) as? [String: Any] {
                     if let items = obj["items"] as? [[String: Any]] {
                         self.repositories = items
