@@ -17,3 +17,12 @@ struct GitHubRepository: Decodable {
 struct GitHubOwner: Decodable {
     let avatarUrl: String?
 }
+
+extension GitHubRepository {
+    var avatarUrl: URL? {
+        guard let urlString = owner?.avatarUrl, let url = URL(string: urlString) else {
+            return nil
+        }
+        return url
+    }
+}

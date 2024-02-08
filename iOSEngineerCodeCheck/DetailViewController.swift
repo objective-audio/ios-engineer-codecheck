@@ -43,10 +43,10 @@ class DetailViewController: UIViewController {
     }
 
     func getImage() {
-        if let urlString = repository.owner?.avatarUrl, let url = URL(string: urlString) {
-            Task {
-                self.imageView.image = try await imageDownloader.download(from: url)
-            }
+        guard let url = repository.avatarUrl else { return }
+
+        Task {
+            self.imageView.image = try await imageDownloader.download(from: url)
         }
     }
 }
