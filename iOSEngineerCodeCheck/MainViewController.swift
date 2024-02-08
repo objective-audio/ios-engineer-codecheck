@@ -3,7 +3,11 @@ import UIKit
 class MainViewController: UITableViewController, UISearchBarDelegate {
     @IBOutlet weak var searchBar: UISearchBar!
 
-    var repositories: [[String: Any]] = []
+    var repositories: [[String: Any]] = [] {
+        didSet {
+            tableView.reloadData()
+        }
+    }
 
     var task: URLSessionTask?
     var selectedIndex: Int!
@@ -35,7 +39,6 @@ class MainViewController: UITableViewController, UISearchBarDelegate {
                     if let items = obj["items"] as? [[String: Any]] {
                         DispatchQueue.main.async {
                             self.repositories = items
-                            self.tableView.reloadData()
                         }
                     }
                 }
