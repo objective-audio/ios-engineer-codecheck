@@ -1,5 +1,9 @@
 import Foundation
 
+struct GitHubRepositories: Decodable {
+    let items: [GitHubRepository]?
+}
+
 struct GitHubRepository: Decodable {
     let fullName: String?
     let language: String?

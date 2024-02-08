@@ -3,7 +3,7 @@ import UIKit
 class MainViewController: UITableViewController, UISearchBarDelegate {
     @IBOutlet weak var searchBar: UISearchBar!
 
-    var repositories: [[String: Any]] = [] {
+    var repositories: [GitHubRepository] = [] {
         didSet {
             tableView.reloadData()
         }
@@ -32,14 +32,18 @@ class MainViewController: UITableViewController, UISearchBarDelegate {
                 return
             }
             let task = URLSession.shared.dataTask(with: url) { [weak self] (data, _, _) in
-                guard let data,
-                    let object = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
-                    let items = object["items"] as? [[String: Any]]
+                guard let data else { return }
+
+                let decoder = JSONDecoder()
+                decoder.keyDecodingStrategy = .convertFromSnakeCase
+
+                guard let repositories = try? decoder.decode(GitHubRepositories.self, from: data)
                 else {
                     return
                 }
+
                 DispatchQueue.main.async {
-                    self?.repositories = items
+                    self?.repositories = repositories.items ?? []
                 }
             }
             self.task = task
@@ -63,8 +67,8 @@ class MainViewController: UITableViewController, UISearchBarDelegate {
     {
         let cell = UITableViewCell()
         let repository = repositories[indexPath.row]
-        cell.textLabel?.text = repository["full_name"] as? String ?? ""
-        cell.detailTextLabel?.text = repository["language"] as? String ?? ""
+        cell.textLabel?.text = repository.fullName
+        cell.detailTextLabel?.text = repository.language
         cell.tag = indexPath.row
         return cell
 
