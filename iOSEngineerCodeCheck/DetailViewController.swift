@@ -1,3 +1,4 @@
+import Combine
 import UIKit
 
 class DetailViewController: UIViewController {
@@ -10,7 +11,9 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var issuesLabel: UILabel!
 
     let repository: GitHubRepository
-    let imageDownloader: ImageDownloader = .init()
+    let imageCache: ImageCache
+
+    private var cancellables: Set<AnyCancellable> = []
 
     static func make(repository: GitHubRepository) -> DetailViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -22,6 +25,7 @@ class DetailViewController: UIViewController {
 
     required init?(coder: NSCoder, repository: GitHubRepository) {
         self.repository = repository
+        imageCache = .init()
         super.init(coder: coder)
     }
 
@@ -39,14 +43,12 @@ class DetailViewController: UIViewController {
         issuesLabel.text = "\(repository.openIssuesCount ?? 0) open issues"
         titleLabel.text = repository.fullName
 
-        getImage()
-    }
+        imageCache.statePublisher.map(\.image).removeDuplicates().sink { [weak self] image in
+            self?.imageView.image = image
+        }.store(in: &cancellables)
 
-    func getImage() {
-        guard let url = repository.avatarUrl else { return }
-
-        Task {
-            self.imageView.image = try await imageDownloader.download(from: url)
+        if let url = repository.avatarUrl {
+            imageCache.load(url: url)
         }
     }
 }
