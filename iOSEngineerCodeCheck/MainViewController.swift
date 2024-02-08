@@ -1,7 +1,6 @@
 import UIKit
 
 class MainViewController: UITableViewController, UISearchBarDelegate {
-
     @IBOutlet weak var searchBar: UISearchBar!
 
     var repositories: [[String: Any]] = []
@@ -29,7 +28,6 @@ class MainViewController: UITableViewController, UISearchBarDelegate {
     }
 
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-
         word = searchBar.text!
 
         if word.count != 0 {
@@ -47,16 +45,13 @@ class MainViewController: UITableViewController, UISearchBarDelegate {
             // これ呼ばなきゃリストが更新されません
             task?.resume()
         }
-
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-
         if segue.identifier == "Detail" {
             let dtl = segue.destination as! DetailViewController
             dtl.vc1 = self
         }
-
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -66,7 +61,6 @@ class MainViewController: UITableViewController, UISearchBarDelegate {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath)
         -> UITableViewCell
     {
-
         let cell = UITableViewCell()
         let rp = repositories[indexPath.row]
         cell.textLabel?.text = rp["full_name"] as? String ?? ""
@@ -80,7 +74,5 @@ class MainViewController: UITableViewController, UISearchBarDelegate {
         // 画面遷移時に呼ばれる
         selectedIndex = indexPath.row
         performSegue(withIdentifier: "Detail", sender: self)
-
     }
-
 }

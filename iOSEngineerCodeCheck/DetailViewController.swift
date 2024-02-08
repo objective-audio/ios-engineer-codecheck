@@ -1,13 +1,9 @@
 import UIKit
 
 class DetailViewController: UIViewController {
-
     @IBOutlet weak var imageView: UIImageView!
-
     @IBOutlet weak var titleLabel: UILabel!
-
     @IBOutlet weak var languageLabel: UILabel!
-
     @IBOutlet weak var starsLabel: UILabel!
     @IBOutlet weak var watchersLabel: UILabel!
     @IBOutlet weak var forksLabel: UILabel!
@@ -26,11 +22,9 @@ class DetailViewController: UIViewController {
         forksLabel.text = "\(repo["forks_count"] as? Int ?? 0) forks"
         issuesLabel.text = "\(repo["open_issues_count"] as? Int ?? 0) open issues"
         getImage()
-
     }
 
     func getImage() {
-
         let repo = vc1.repositories[vc1.selectedIndex]
 
         titleLabel.text = repo["full_name"] as? String
@@ -45,7 +39,5 @@ class DetailViewController: UIViewController {
                 }.resume()
             }
         }
-
     }
-
 }
