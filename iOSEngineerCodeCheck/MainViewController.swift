@@ -9,7 +9,8 @@ class MainViewController: UITableViewController, UISearchBarDelegate {
         }
     }
 
-    var task: URLSessionTask?
+    let githubAPIClient: GitHubAPIClient = .init()
+    var task: Task<Void, Error>?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,34 +21,16 @@ class MainViewController: UITableViewController, UISearchBarDelegate {
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         task?.cancel()
+        task = nil
     }
 
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         let word = searchBar.text ?? ""
 
         if word.count > 0 {
-            guard let url = URL(string: "https://api.github.com/search/repositories?q=\(word)")
-            else {
-                return
+            task = Task {
+                self.repositories = try await githubAPIClient.fetchRepositories(word: word)
             }
-            let task = URLSession.shared.dataTask(with: url) { [weak self] (data, _, _) in
-                guard let data else { return }
-
-                let decoder = JSONDecoder()
-                decoder.keyDecodingStrategy = .convertFromSnakeCase
-
-                guard let repositories = try? decoder.decode(GitHubRepositories.self, from: data)
-                else {
-                    return
-                }
-
-                DispatchQueue.main.async {
-                    self?.repositories = repositories.items ?? []
-                }
-            }
-            self.task = task
-            // これ呼ばなきゃリストが更新されません
-            task.resume()
         }
     }
 
