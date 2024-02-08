@@ -21,13 +21,12 @@ class DetailViewController: UIViewController {
         watchersLabel.text = "\(repository["wachers_count"] as? Int ?? 0) watchers"
         forksLabel.text = "\(repository["forks_count"] as? Int ?? 0) forks"
         issuesLabel.text = "\(repository["open_issues_count"] as? Int ?? 0) open issues"
+        titleLabel.text = repository["full_name"] as? String
         getImage()
     }
 
     func getImage() {
         let repository = mainVC.repositories[mainVC.selectedIndex]
-
-        titleLabel.text = repository["full_name"] as? String
 
         if let owner = repository["owner"] as? [String: Any] {
             if let urlString = owner["avatar_url"] as? String, let url = URL(string: urlString) {
