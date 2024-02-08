@@ -33,14 +33,19 @@ class MainViewController: UITableViewController, UISearchBarDelegate {
         let word = searchBar.text ?? ""
 
         if word.count > 0 {
-            let url = "https://api.github.com/search/repositories?q=\(word)"
-            let task = URLSession.shared.dataTask(with: URL(string: url)!) { (data, _, _) in
-                if let obj = try! JSONSerialization.jsonObject(with: data!) as? [String: Any] {
-                    if let items = obj["items"] as? [[String: Any]] {
-                        DispatchQueue.main.async {
-                            self.repositories = items
-                        }
-                    }
+            guard let url = URL(string: "https://api.github.com/search/repositories?q=\(word)")
+            else {
+                return
+            }
+            let task = URLSession.shared.dataTask(with: url) { (data, _, _) in
+                guard let data,
+                    let object = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
+                    let items = object["items"] as? [[String: Any]]
+                else {
+                    return
+                }
+                DispatchQueue.main.async {
+                    self.repositories = items
                 }
             }
             self.task = task
