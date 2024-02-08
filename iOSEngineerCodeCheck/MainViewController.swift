@@ -49,8 +49,7 @@ class MainViewController: UITableViewController, UISearchBarDelegate {
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "Detail" {
-            let detail = segue.destination as! DetailViewController
+        if segue.identifier == "Detail", let detail = segue.destination as? DetailViewController {
             detail.mainVC = self
         }
     }
