@@ -52,12 +52,6 @@ class MainViewController: UITableViewController, UISearchBarDelegate {
         }
     }
 
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "Detail", let detail = segue.destination as? DetailViewController {
-            detail.repository = repositories[selectedIndex]
-        }
-    }
-
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return repositories.count
     }
@@ -75,8 +69,8 @@ class MainViewController: UITableViewController, UISearchBarDelegate {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // 画面遷移時に呼ばれる
-        selectedIndex = indexPath.row
-        performSegue(withIdentifier: "Detail", sender: self)
+        let repository = repositories[indexPath.row]
+        let detail = DetailViewController.make(repository: repository)
+        navigationController?.pushViewController(detail, animated: true)
     }
 }
