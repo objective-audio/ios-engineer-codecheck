@@ -7,7 +7,6 @@ class MainViewController: UITableViewController, UISearchBarDelegate {
 
     var task: URLSessionTask?
     var word: String!
-    var url: String!
     var selectedIndex: Int!
 
     override func viewDidLoad() {
@@ -31,7 +30,7 @@ class MainViewController: UITableViewController, UISearchBarDelegate {
         word = searchBar.text!
 
         if word.count != 0 {
-            url = "https://api.github.com/search/repositories?q=\(word!)"
+            let url = "https://api.github.com/search/repositories?q=\(word!)"
             task = URLSession.shared.dataTask(with: URL(string: url)!) { (data, _, _) in
                 if let obj = try! JSONSerialization.jsonObject(with: data!) as? [String: Any] {
                     if let items = obj["items"] as? [[String: Any]] {
