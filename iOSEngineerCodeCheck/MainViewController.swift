@@ -50,7 +50,7 @@ class MainViewController: UITableViewController, UISearchBarDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "Detail" {
             let detail = segue.destination as! DetailViewController
-            detail.vc1 = self
+            detail.mainVC = self
         }
     }
 

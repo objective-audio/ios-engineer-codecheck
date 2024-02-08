@@ -9,12 +9,12 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var forksLabel: UILabel!
     @IBOutlet weak var issuesLabel: UILabel!
 
-    var vc1: MainViewController!
+    var mainVC: MainViewController!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let repo = vc1.repositories[vc1.selectedIndex]
+        let repo = mainVC.repositories[mainVC.selectedIndex]
 
         languageLabel.text = "Written in \(repo["language"] as? String ?? "")"
         starsLabel.text = "\(repo["stargazers_count"] as? Int ?? 0) stars"
@@ -25,7 +25,7 @@ class DetailViewController: UIViewController {
     }
 
     func getImage() {
-        let repo = vc1.repositories[vc1.selectedIndex]
+        let repo = mainVC.repositories[mainVC.selectedIndex]
 
         titleLabel.text = repo["full_name"] as? String
 
