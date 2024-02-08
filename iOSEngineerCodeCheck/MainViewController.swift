@@ -31,7 +31,7 @@ class MainViewController: UITableViewController, UISearchBarDelegate {
             else {
                 return
             }
-            let task = URLSession.shared.dataTask(with: url) { (data, _, _) in
+            let task = URLSession.shared.dataTask(with: url) { [weak self] (data, _, _) in
                 guard let data,
                     let object = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
                     let items = object["items"] as? [[String: Any]]
@@ -39,7 +39,7 @@ class MainViewController: UITableViewController, UISearchBarDelegate {
                     return
                 }
                 DispatchQueue.main.async {
-                    self.repositories = items
+                    self?.repositories = items
                 }
             }
             self.task = task

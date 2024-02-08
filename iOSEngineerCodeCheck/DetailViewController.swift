@@ -31,12 +31,12 @@ class DetailViewController: UIViewController {
 
         if let owner = repository["owner"] as? [String: Any] {
             if let urlString = owner["avatar_url"] as? String, let url = URL(string: urlString) {
-                URLSession.shared.dataTask(with: url) { (data, _, _) in
+                URLSession.shared.dataTask(with: url) { [weak self] (data, _, _) in
                     guard let data, let image = UIImage(data: data) else {
                         return
                     }
                     DispatchQueue.main.async {
-                        self.imageView.image = image
+                        self?.imageView.image = image
                     }
                 }.resume()
             }
