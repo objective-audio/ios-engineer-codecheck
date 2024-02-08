@@ -33,8 +33,8 @@ class MainViewController: UITableViewController, UISearchBarDelegate {
             let task = URLSession.shared.dataTask(with: URL(string: url)!) { (data, _, _) in
                 if let obj = try! JSONSerialization.jsonObject(with: data!) as? [String: Any] {
                     if let items = obj["items"] as? [[String: Any]] {
-                        self.repositories = items
                         DispatchQueue.main.async {
+                            self.repositories = items
                             self.tableView.reloadData()
                         }
                     }
