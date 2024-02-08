@@ -3,24 +3,20 @@ import UIKit
 class MainViewController: UITableViewController, UISearchBarDelegate {
     @IBOutlet weak var searchBar: UISearchBar!
 
-    var repositories: [[String: Any]] = []
+    var repositories: [[String: Any]] = [] {
+        didSet {
+            tableView.reloadData()
+        }
+    }
 
     var task: URLSessionTask?
-    var word: String!
-    var url: String!
     var selectedIndex: Int!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        searchBar.text = "GitHubのリポジトリを検索できるよー"
+        searchBar.placeholder = "GitHubのリポジトリを検索できるよー"
         searchBar.delegate = self
-    }
-
-    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
-        // ↓こうすれば初期のテキストを消せる
-        searchBar.text = ""
-        return true
     }
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -28,28 +24,32 @@ class MainViewController: UITableViewController, UISearchBarDelegate {
     }
 
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        word = searchBar.text!
+        let word = searchBar.text ?? ""
 
-        if word.count != 0 {
-            url = "https://api.github.com/search/repositories?q=\(word!)"
-            task = URLSession.shared.dataTask(with: URL(string: url)!) { (data, _, _) in
-                if let obj = try! JSONSerialization.jsonObject(with: data!) as? [String: Any] {
-                    if let items = obj["items"] as? [[String: Any]] {
-                        self.repositories = items
-                        DispatchQueue.main.async {
-                            self.tableView.reloadData()
-                        }
-                    }
+        if word.count > 0 {
+            guard let url = URL(string: "https://api.github.com/search/repositories?q=\(word)")
+            else {
+                return
+            }
+            let task = URLSession.shared.dataTask(with: url) { [weak self] (data, _, _) in
+                guard let data,
+                    let object = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
+                    let items = object["items"] as? [[String: Any]]
+                else {
+                    return
+                }
+                DispatchQueue.main.async {
+                    self?.repositories = items
                 }
             }
+            self.task = task
             // これ呼ばなきゃリストが更新されません
-            task?.resume()
+            task.resume()
         }
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "Detail" {
-            let detail = segue.destination as! DetailViewController
+        if segue.identifier == "Detail", let detail = segue.destination as? DetailViewController {
             detail.mainVC = self
         }
     }
