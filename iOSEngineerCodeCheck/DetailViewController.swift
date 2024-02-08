@@ -10,6 +10,7 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var issuesLabel: UILabel!
 
     let repository: GitHubRepository
+    let imageDownloader: ImageDownloader = .init()
 
     static func make(repository: GitHubRepository) -> DetailViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -37,19 +38,15 @@ class DetailViewController: UIViewController {
         forksLabel.text = "\(repository.forksCount ?? 0) forks"
         issuesLabel.text = "\(repository.openIssuesCount ?? 0) open issues"
         titleLabel.text = repository.fullName
+
         getImage()
     }
 
     func getImage() {
-        if let urlString = repository.owner?.avatarUrl, let url = URL(string: urlString) {
-            URLSession.shared.dataTask(with: url) { [weak self] (data, _, _) in
-                guard let data, let image = UIImage(data: data) else {
-                    return
-                }
-                DispatchQueue.main.async {
-                    self?.imageView.image = image
-                }
-            }.resume()
+        guard let url = repository.avatarUrl else { return }
+
+        Task {
+            self.imageView.image = try await imageDownloader.download(from: url)
         }
     }
 }

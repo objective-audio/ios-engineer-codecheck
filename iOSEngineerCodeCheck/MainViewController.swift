@@ -10,7 +10,6 @@ class MainViewController: UITableViewController, UISearchBarDelegate {
     }
 
     var task: URLSessionTask?
-    var selectedIndex: Int!
 
     override func viewDidLoad() {
         super.viewDidLoad()
