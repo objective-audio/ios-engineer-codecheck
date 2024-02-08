@@ -9,12 +9,10 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var forksLabel: UILabel!
     @IBOutlet weak var issuesLabel: UILabel!
 
-    var mainVC: MainViewController!
+    var repository: [String: Any]!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        let repository = mainVC.repositories[mainVC.selectedIndex]
 
         languageLabel.text = "Written in \(repository["language"] as? String ?? "")"
         starsLabel.text = "\(repository["stargazers_count"] as? Int ?? 0) stars"
@@ -26,8 +24,6 @@ class DetailViewController: UIViewController {
     }
 
     func getImage() {
-        let repository = mainVC.repositories[mainVC.selectedIndex]
-
         if let owner = repository["owner"] as? [String: Any] {
             if let urlString = owner["avatar_url"] as? String, let url = URL(string: urlString) {
                 URLSession.shared.dataTask(with: url) { [weak self] (data, _, _) in
