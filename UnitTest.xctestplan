@@ -1,0 +1,36 @@
+{
+  "configurations" : [
+    {
+      "id" : "AD2D537D-D99B-43B8-B2CD-D12CED4D41AB",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:iOSEngineerCodeCheck.xcodeproj",
+      "identifier" : "BFD945DA244DC5E80012785A",
+      "name" : "iOSEngineerCodeCheck"
+    }
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:iOSEngineerCodeCheck.xcodeproj",
+        "identifier" : "BFD945F0244DC5EB0012785A",
+        "name" : "iOSEngineerCodeCheckTests"
+      }
+    },
+    {
+      "enabled" : false,
+      "target" : {
+        "containerPath" : "container:iOSEngineerCodeCheck.xcodeproj",
+        "identifier" : "BFD945FB244DC5EB0012785A",
+        "name" : "iOSEngineerCodeCheckUITests"
+      }
+    }
+  ],
+  "version" : 1
+}
