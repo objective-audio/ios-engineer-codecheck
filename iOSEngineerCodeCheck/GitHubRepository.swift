@@ -9,7 +9,7 @@ struct GitHubRepository: Decodable {
     let language: String?
     let owner: GitHubOwner?
     let stargazersCount: Int?
-    let wachersCount: Int?
+    let watchersCount: Int?
     let forksCount: Int?
     let openIssuesCount: Int?
 }

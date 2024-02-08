@@ -16,7 +16,7 @@ class DetailViewController: UIViewController {
 
         languageLabel.text = "Written in \(repository.language ?? "")"
         starsLabel.text = "\(repository.stargazersCount ?? 0) stars"
-        watchersLabel.text = "\(repository.wachersCount ?? 0) watchers"
+        watchersLabel.text = "\(repository.watchersCount ?? 0) watchers"
         forksLabel.text = "\(repository.forksCount ?? 0) forks"
         issuesLabel.text = "\(repository.openIssuesCount ?? 0) open issues"
         titleLabel.text = repository.fullName
