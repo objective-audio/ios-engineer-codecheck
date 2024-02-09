@@ -32,7 +32,6 @@ class MainViewController: UITableViewController {
         cell.detailTextLabel?.text = repository.language
         cell.tag = indexPath.row
         return cell
-
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
