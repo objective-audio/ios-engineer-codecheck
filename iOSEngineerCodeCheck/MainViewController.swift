@@ -27,14 +27,20 @@ class MainViewController: UITableViewController {
         -> UITableViewCell
     {
         let cell = UITableViewCell()
-        let repository = repositories[indexPath.row]
-        cell.textLabel?.text = repository.fullName
-        cell.detailTextLabel?.text = repository.language
-        cell.tag = indexPath.row
+
+        if indexPath.row < repositories.count {
+            let repository = repositories[indexPath.row]
+            cell.textLabel?.text = repository.fullName
+            cell.detailTextLabel?.text = repository.language
+            cell.tag = indexPath.row
+        }
+
         return cell
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard indexPath.row < repositories.count else { return }
+
         let repository = repositories[indexPath.row]
         let detail = DetailViewController.make(repository: repository)
         navigationController?.pushViewController(detail, animated: true)
