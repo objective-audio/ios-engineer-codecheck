@@ -2,7 +2,7 @@ import Foundation
 
 import class UIKit.UIImage
 
-final class ImageDownloader {
+final class ImageDownloader: DownloaderForImageCache {
     enum DownloadError: Error {
         case dataConvertFailed
     }
