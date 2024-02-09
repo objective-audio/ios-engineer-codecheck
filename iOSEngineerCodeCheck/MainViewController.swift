@@ -1,6 +1,6 @@
 import UIKit
 
-class MainViewController: UITableViewController, UISearchBarDelegate {
+class MainViewController: UITableViewController {
     @IBOutlet weak var searchBar: UISearchBar!
 
     var repositories: [GitHubRepository] = [] {
@@ -17,21 +17,6 @@ class MainViewController: UITableViewController, UISearchBarDelegate {
         // Do any additional setup after loading the view.
         searchBar.placeholder = "GitHubのリポジトリを検索できるよー"
         searchBar.delegate = self
-    }
-
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        task?.cancel()
-        task = nil
-    }
-
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        let word = searchBar.text ?? ""
-
-        if word.count > 0 {
-            task = Task {
-                self.repositories = try await githubAPIClient.fetchRepositories(word: word)
-            }
-        }
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -54,5 +39,22 @@ class MainViewController: UITableViewController, UISearchBarDelegate {
         let repository = repositories[indexPath.row]
         let detail = DetailViewController.make(repository: repository)
         navigationController?.pushViewController(detail, animated: true)
+    }
+}
+
+extension MainViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        task?.cancel()
+        task = nil
+    }
+
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        let word = searchBar.text ?? ""
+
+        if word.count > 0 {
+            task = Task {
+                self.repositories = try await githubAPIClient.fetchRepositories(word: word)
+            }
+        }
     }
 }
