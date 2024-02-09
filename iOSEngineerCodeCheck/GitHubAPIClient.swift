@@ -6,7 +6,10 @@ actor GitHubAPIClient {
     }
 
     func fetchRepositories(word: String) async throws -> [GitHubRepository] {
-        guard let url = URL(string: "https://api.github.com/search/repositories?q=\(word)") else {
+        var components = URLComponents(string: "https://api.github.com/search/repositories")!
+        components.queryItems = [.init(name: "q", value: word)]
+
+        guard let url = components.url else {
             throw FetchError.makeUrlFailed
         }
 
