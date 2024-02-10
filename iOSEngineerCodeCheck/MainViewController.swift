@@ -6,7 +6,7 @@ class MainViewController: UITableViewController {
 
     private let searcher: GitHubSearcher = .init()
     private var cancellables: Set<AnyCancellable> = []
-    private var repositories: [GitHubRepository] { searcher.repositories }
+    private var repositories: [GitHubRepository] { searcher.state.repositories }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -14,7 +14,7 @@ class MainViewController: UITableViewController {
         searchBar.placeholder = "GitHubのリポジトリを検索できるよー"
         searchBar.delegate = self
 
-        searcher.repositoriesPublisher.sink { [weak self] _ in
+        searcher.statePublisher.map(\.repositories).sink { [weak self] _ in
             self?.tableView.reloadData()
         }.store(in: &cancellables)
     }

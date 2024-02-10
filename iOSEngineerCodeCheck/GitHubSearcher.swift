@@ -18,11 +18,6 @@ final class GitHubSearcher {
         stateSubject.eraseToAnyPublisher()
     }
 
-    var repositories: [GitHubRepository] { state.repositories }
-    var repositoriesPublisher: AnyPublisher<[GitHubRepository], Never> {
-        stateSubject.map(\.repositories).eraseToAnyPublisher()
-    }
-
     init(apiClient: GitHubAPIClientForSearcher = GitHubAPIClient()) {
         self.apiClient = apiClient
     }
@@ -37,11 +32,11 @@ final class GitHubSearcher {
             state = .loaded(repositories)
         }
 
-        state = .loading(task, repositories)
+        state = .loading(task, state.repositories)
     }
 
     func cancel() {
         state.task?.cancel()
-        state = .loaded(repositories)
+        state = .loaded(state.repositories)
     }
 }

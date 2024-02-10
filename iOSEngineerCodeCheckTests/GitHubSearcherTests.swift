@@ -29,27 +29,27 @@ final class GitHubSearcherTests: XCTestCase {
         let apiClient = APIClientMock(result: .success(repositories))
         let searcher = GitHubSearcher(apiClient: apiClient)
 
-        var received: [[GitHubRepository]] = []
+        var received: [GitHubSearcherState] = []
         let expectation = XCTestExpectation(description: "fetched")
 
-        let canceller = searcher.repositoriesPublisher.sink { repositories in
-            received.append(repositories)
+        let canceller = searcher.statePublisher.sink { state in
+            received.append(state)
 
-            if !repositories.isEmpty {
+            if case .loaded = state {
                 expectation.fulfill()
             }
         }
 
-        XCTAssertEqual(searcher.repositories, [])
+        XCTAssertEqual(searcher.state.repositories, [])
         XCTAssertEqual(received.count, 1)
-        XCTAssertEqual(received[0], [])
+        XCTAssertEqual(received[0].repositories, [])
 
         searcher.search(word: "hoge")
 
         wait(for: [expectation], timeout: 10.0)
 
-        XCTAssertEqual(searcher.repositories, repositories)
-        XCTAssertEqual(received.last, repositories)
+        XCTAssertEqual(searcher.state.repositories, repositories)
+        XCTAssertEqual(received.last?.repositories, repositories)
 
         canceller.cancel()
     }
