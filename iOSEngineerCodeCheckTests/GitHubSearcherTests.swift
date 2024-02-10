@@ -78,4 +78,36 @@ final class GitHubSearcherTests: XCTestCase {
 
         canceller.cancel()
     }
+
+    func test_検索が失敗してデータは空のまま() {
+        let apiClient = APIClientMock(result: .failure(TestError.dummy))
+        let searcher = GitHubSearcher(apiClient: apiClient)
+
+        var received: [GitHubSearcherState] = []
+        let expectation = XCTestExpectation(description: "failed")
+
+        let canceller = searcher.statePublisher.sink { state in
+            received.append(state)
+
+            if case .failed = state {
+                expectation.fulfill()
+            }
+        }
+
+        XCTAssertTrue(searcher.state.isMatch(.initial))
+        XCTAssertEqual(received.count, 1)
+        XCTAssertTrue(received[0].isMatch(.initial))
+
+        searcher.search(word: "hoge")
+
+        wait(for: [expectation], timeout: 10.0)
+
+        XCTAssertTrue(searcher.state.isMatch(.failed([])))
+
+        XCTAssertEqual(received.count, 3)
+        XCTAssertTrue(received[1].isMatch(.loading([])))
+        XCTAssertTrue(received[2].isMatch(.failed([])))
+
+        canceller.cancel()
+    }
 }
