@@ -152,10 +152,10 @@
             </objects>
             <point key="canvasLocation" x="230" y="137"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Root Navigation Controller-->
         <scene sceneID="hWi-qa-NBR">
             <objects>
-                <navigationController id="wFt-RI-uk4" sceneMemberID="viewController">
+                <navigationController id="wFt-RI-uk4" customClass="RootNavigationController" customModule="iOSEngineerCodeCheck" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="iRk-f0-Qkc">
                         <rect key="frame" x="0.0" y="48" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
