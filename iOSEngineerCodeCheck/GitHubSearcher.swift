@@ -9,13 +9,19 @@ protocol GitHubAPIClientForSearcher {
 final class GitHubSearcher {
     private let apiClient: GitHubAPIClientForSearcher
 
-    private let repositoriesSubject: CurrentValueSubject<[GitHubRepository], Never> = .init([])
-    var repositories: [GitHubRepository] { repositoriesSubject.value }
-    var repositoriesPublisher: AnyPublisher<[GitHubRepository], Never> {
-        repositoriesSubject.eraseToAnyPublisher()
+    private let stateSubject: CurrentValueSubject<GitHubSearcherState, Never> = .init(.initial)
+    private(set) var state: GitHubSearcherState {
+        get { stateSubject.value }
+        set { stateSubject.value = newValue }
+    }
+    var statePublisher: AnyPublisher<GitHubSearcherState, Never> {
+        stateSubject.eraseToAnyPublisher()
     }
 
-    private var task: Task<Void, Error>?
+    var repositories: [GitHubRepository] { state.repositories }
+    var repositoriesPublisher: AnyPublisher<[GitHubRepository], Never> {
+        stateSubject.map(\.repositories).eraseToAnyPublisher()
+    }
 
     init(apiClient: GitHubAPIClientForSearcher = GitHubAPIClient()) {
         self.apiClient = apiClient
@@ -24,16 +30,18 @@ final class GitHubSearcher {
     func search(word: String) {
         guard word.count > 0 else { return }
 
-        cancel()
+        state.task?.cancel()
 
-        task = Task {
+        let task = Task {
             let repositories = try await apiClient.fetchRepositories(word: word)
-            repositoriesSubject.value = repositories
+            state = .loaded(repositories)
         }
+
+        state = .loading(task, repositories)
     }
 
     func cancel() {
-        task?.cancel()
-        task = nil
+        state.task?.cancel()
+        state = .loaded(repositories)
     }
 }
