@@ -54,4 +54,43 @@ final class NavigationRouterTests: XCTestCase {
                 [.main, .detail(.init(repository: .init(testFullName: "main_appeared")))])
         }
     }
+
+    func test_elementsの購読() {
+        let router = NavigationRouter()
+
+        var received: [[NavigationElement]] = []
+
+        let canceller = router.elementsPublisher.removeDuplicates().sink {
+            received.append($0)
+        }
+
+        XCTContext.runActivity(named: "購読開始・mainのみ") { _ in
+            XCTAssertEqual(received.count, 1)
+            XCTAssertEqual(received[0], [.main])
+        }
+
+        XCTContext.runActivity(named: "メイン画面が表示される・mainのみで変わらず") { _ in
+            router.mainDidAppear()
+
+            XCTAssertEqual(received.count, 1)
+        }
+
+        XCTContext.runActivity(named: "詳細画面が表示される・detailが追加") { _ in
+            router.showDetail(.init(repository: .init(testFullName: "show_detail")))
+
+            XCTAssertEqual(received.count, 2)
+            XCTAssertEqual(
+                received[1],
+                [.main, .detail(.init(repository: .init(testFullName: "show_detail")))])
+        }
+
+        XCTContext.runActivity(named: "メイン画面に戻る・detailが削除") { _ in
+            router.mainDidAppear()
+
+            XCTAssertEqual(received.count, 3)
+            XCTAssertEqual(received[2], [.main])
+        }
+
+        canceller.cancel()
+    }
 }
