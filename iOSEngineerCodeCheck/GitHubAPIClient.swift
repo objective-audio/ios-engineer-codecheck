@@ -30,6 +30,6 @@ actor GitHubAPIClient: GitHubAPIClientForSearcher {
 
         let repositories = try decoder.decode(GitHubRepositories.self, from: data)
 
-        return repositories.items ?? []
+        return repositories.items
     }
 }
