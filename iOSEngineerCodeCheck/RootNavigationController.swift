@@ -8,7 +8,7 @@ class RootNavigationController: UINavigationController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        router.elementsPublisher.sink { [weak self] _ in
+        router.elementsPublisher.removeDuplicates().sink { [weak self] _ in
             self?.updateViewControllers()
         }.store(in: &cancellables)
     }
