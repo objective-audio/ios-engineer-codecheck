@@ -1,22 +1,22 @@
+import Combine
 import UIKit
 
 class MainViewController: UITableViewController {
     @IBOutlet weak var searchBar: UISearchBar!
 
-    var repositories: [GitHubRepository] = [] {
-        didSet {
-            tableView.reloadData()
-        }
-    }
-
-    let githubAPIClient: GitHubAPIClient = .init()
-    var task: Task<Void, Error>?
+    private let searcher: GitHubSearcher = .init()
+    private var cancellables: Set<AnyCancellable> = []
+    private var repositories: [GitHubRepository] { searcher.repositories }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+
         searchBar.placeholder = "GitHubのリポジトリを検索できるよー"
         searchBar.delegate = self
+
+        searcher.repositoriesPublisher.sink { [weak self] _ in
+            self?.tableView.reloadData()
+        }.store(in: &cancellables)
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -49,17 +49,10 @@ class MainViewController: UITableViewController {
 
 extension MainViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        task?.cancel()
-        task = nil
+        searcher.cancel()
     }
 
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        let word = searchBar.text ?? ""
-
-        if word.count > 0 {
-            task = Task {
-                self.repositories = try await githubAPIClient.fetchRepositories(word: word)
-            }
-        }
+        searcher.search(word: searchBar.text ?? "")
     }
 }
