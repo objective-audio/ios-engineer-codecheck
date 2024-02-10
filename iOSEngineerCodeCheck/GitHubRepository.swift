@@ -4,7 +4,7 @@ struct GitHubRepositories: Decodable {
     let items: [GitHubRepository]?
 }
 
-struct GitHubRepository: Decodable {
+struct GitHubRepository: Decodable, Equatable {
     let fullName: String?
     let language: String?
     let owner: GitHubOwner?
@@ -14,7 +14,7 @@ struct GitHubRepository: Decodable {
     let openIssuesCount: Int?
 }
 
-struct GitHubOwner: Decodable {
+struct GitHubOwner: Decodable, Equatable {
     let avatarUrl: String?
 }
 

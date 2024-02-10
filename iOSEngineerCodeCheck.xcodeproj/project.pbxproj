@@ -16,6 +16,10 @@
 		B636A8FF2B75006C0084CD0A /* ImageCacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B636A8FE2B75006C0084CD0A /* ImageCacheTests.swift */; };
 		B636A9012B7506920084CD0A /* TestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B636A9002B7506920084CD0A /* TestError.swift */; };
 		B636A9072B766A320084CD0A /* GitHubRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B636A9062B766A320084CD0A /* GitHubRepositoryTests.swift */; };
+		B636A90D2B76F40B0084CD0A /* GitHubSearcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = B636A90C2B76F40B0084CD0A /* GitHubSearcher.swift */; };
+		B636A90F2B76FA9C0084CD0A /* GitHubSearcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B636A90E2B76FA9C0084CD0A /* GitHubSearcherTests.swift */; };
+		B636A9132B76FC0F0084CD0A /* GitHubRepositoryExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B636A9122B76FC0F0084CD0A /* GitHubRepositoryExtension.swift */; };
+		B636A9152B770EBB0084CD0A /* GitHubSearcherState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B636A9142B770EBB0084CD0A /* GitHubSearcherState.swift */; };
 		BF0A658D244F2A3B00280FA6 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0A658C244F2A3B00280FA6 /* DetailViewController.swift */; };
 		BFD945DF244DC5E80012785A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD945DE244DC5E80012785A /* AppDelegate.swift */; };
 		BFD945E1244DC5E80012785A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD945E0244DC5E80012785A /* SceneDelegate.swift */; };
@@ -54,6 +58,10 @@
 		B636A8FE2B75006C0084CD0A /* ImageCacheTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheTests.swift; sourceTree = "<group>"; };
 		B636A9002B7506920084CD0A /* TestError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestError.swift; sourceTree = "<group>"; };
 		B636A9062B766A320084CD0A /* GitHubRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubRepositoryTests.swift; sourceTree = "<group>"; };
+		B636A90C2B76F40B0084CD0A /* GitHubSearcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubSearcher.swift; sourceTree = "<group>"; };
+		B636A90E2B76FA9C0084CD0A /* GitHubSearcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubSearcherTests.swift; sourceTree = "<group>"; };
+		B636A9122B76FC0F0084CD0A /* GitHubRepositoryExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubRepositoryExtension.swift; sourceTree = "<group>"; };
+		B636A9142B770EBB0084CD0A /* GitHubSearcherState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubSearcherState.swift; sourceTree = "<group>"; };
 		BF0A658C244F2A3B00280FA6 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		BFD945DB244DC5E80012785A /* iOSEngineerCodeCheck.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSEngineerCodeCheck.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFD945DE244DC5E80012785A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -125,6 +133,8 @@
 				BF0A658C244F2A3B00280FA6 /* DetailViewController.swift */,
 				B636A8F82B74F3730084CD0A /* ImageCache.swift */,
 				B636A8FA2B74FB400084CD0A /* ImageCacheState.swift */,
+				B636A90C2B76F40B0084CD0A /* GitHubSearcher.swift */,
+				B636A9142B770EBB0084CD0A /* GitHubSearcherState.swift */,
 				B636A8F02B749DD40084CD0A /* GitHubRepository.swift */,
 				B636A8F42B74B6720084CD0A /* GitHubAPIClient.swift */,
 				B636A8F22B74AA9A0084CD0A /* ImageDownloader.swift */,
@@ -142,7 +152,9 @@
 				B636A8FC2B74FC5B0084CD0A /* ImageCacheStateTests.swift */,
 				B636A8FE2B75006C0084CD0A /* ImageCacheTests.swift */,
 				B636A9062B766A320084CD0A /* GitHubRepositoryTests.swift */,
+				B636A90E2B76FA9C0084CD0A /* GitHubSearcherTests.swift */,
 				B636A9002B7506920084CD0A /* TestError.swift */,
+				B636A9122B76FC0F0084CD0A /* GitHubRepositoryExtension.swift */,
 				BFD945F7244DC5EB0012785A /* Info.plist */,
 			);
 			path = iOSEngineerCodeCheckTests;
@@ -312,6 +324,8 @@
 			files = (
 				BFD945E3244DC5E80012785A /* MainViewController.swift in Sources */,
 				BF0A658D244F2A3B00280FA6 /* DetailViewController.swift in Sources */,
+				B636A9152B770EBB0084CD0A /* GitHubSearcherState.swift in Sources */,
+				B636A90D2B76F40B0084CD0A /* GitHubSearcher.swift in Sources */,
 				B636A8F92B74F3730084CD0A /* ImageCache.swift in Sources */,
 				B636A8F12B749DD40084CD0A /* GitHubRepository.swift in Sources */,
 				BFD945DF244DC5E80012785A /* AppDelegate.swift in Sources */,
@@ -326,9 +340,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B636A9132B76FC0F0084CD0A /* GitHubRepositoryExtension.swift in Sources */,
 				B636A9072B766A320084CD0A /* GitHubRepositoryTests.swift in Sources */,
 				B636A8FF2B75006C0084CD0A /* ImageCacheTests.swift in Sources */,
 				B636A9012B7506920084CD0A /* TestError.swift in Sources */,
+				B636A90F2B76FA9C0084CD0A /* GitHubSearcherTests.swift in Sources */,
 				B636A8FD2B74FC5B0084CD0A /* ImageCacheStateTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

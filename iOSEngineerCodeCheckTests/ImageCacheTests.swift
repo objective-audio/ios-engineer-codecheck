@@ -78,7 +78,7 @@ final class ImageCacheTests: XCTestCase {
         let imageCache = ImageCache(downloader: DownloaderMock(result: .failure(TestError.dummy)))
 
         var receivedStates: [ImageCacheState] = []
-        let expectation = XCTestExpectation(description: "loaded")
+        let expectation = XCTestExpectation(description: "failed")
 
         let canceller = imageCache.statePublisher.sink { state in
             receivedStates.append(state)
