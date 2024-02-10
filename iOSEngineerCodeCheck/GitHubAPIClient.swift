@@ -15,7 +15,7 @@ actor GitHubAPIClient: GitHubAPIClientForSearcher {
         self.urlSession = urlSession
     }
 
-    func fetchRepositories(word: String) async throws -> [GitHubRepository] {
+    func searchRepositories(word: String) async throws -> [GitHubRepository] {
         var components = URLComponents(string: "https://api.github.com/search/repositories")!
         components.queryItems = [.init(name: "q", value: word)]
 

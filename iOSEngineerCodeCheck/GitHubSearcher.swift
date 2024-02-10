@@ -2,7 +2,7 @@ import Combine
 import Foundation
 
 protocol GitHubAPIClientForSearcher {
-    func fetchRepositories(word: String) async throws -> [GitHubRepository]
+    func searchRepositories(word: String) async throws -> [GitHubRepository]
 }
 
 @MainActor
@@ -29,7 +29,7 @@ final class GitHubSearcher {
 
         let task = Task {
             do {
-                let repositories = try await apiClient.fetchRepositories(word: word)
+                let repositories = try await apiClient.searchRepositories(word: word)
                 state = .loaded(repositories)
             } catch {
                 state = .failed(error, state.repositories)
