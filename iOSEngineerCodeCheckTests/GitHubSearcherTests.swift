@@ -71,7 +71,10 @@ final class GitHubSearcherTests: XCTestCase {
         wait(for: [expectation], timeout: 10.0)
 
         XCTAssertTrue(searcher.state.isMatch(.loaded(repositories)))
-        XCTAssertTrue(received.last?.isMatch(.loaded(repositories)) ?? false)
+
+        XCTAssertEqual(received.count, 3)
+        XCTAssertTrue(received[1].isMatch(.loading([])))
+        XCTAssertTrue(received[2].isMatch(.loaded(repositories)))
 
         canceller.cancel()
     }
