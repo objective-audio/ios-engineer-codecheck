@@ -1,0 +1,30 @@
+{
+    "items": [
+        {
+            "id": 1,
+            "full_name": "full-name-1",
+            "owner": {
+                "id": 10,
+                "avatar_url": "https://avatars.githubusercontent.com/u/1?v=4"
+            },
+            "stargazers_count": 101,
+            "watchers_count": 102,
+            "language": "PHP",
+            "forks_count": 103,
+            "open_issues_count": 104
+        },
+        {
+            "id": 2,
+            "full_name": "full-name-2",
+            "owner": {
+                "id": 20,
+                "avatar_url": "https://avatars.githubusercontent.com/u/2?v=4"
+            },
+            "stargazers_count": 201,
+            "watchers_count": 202,
+            "language": "Java",
+            "forks_count": 203,
+            "open_issues_count": 204
+        }
+    ]
+}

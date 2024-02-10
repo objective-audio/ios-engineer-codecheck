@@ -1,7 +1,7 @@
 import Foundation
 
 struct GitHubRepositories: Decodable {
-    let items: [GitHubRepository]?
+    let items: [GitHubRepository]
 }
 
 struct GitHubRepository: Decodable, Equatable {

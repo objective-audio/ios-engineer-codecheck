@@ -9,7 +9,7 @@ private actor APIClientMock: GitHubAPIClientForSearcher {
         self.result = result
     }
 
-    func fetchRepositories(word: String) async throws -> [GitHubRepository] {
+    func searchRepositories(word: String) async throws -> [GitHubRepository] {
         try result.get()
     }
 }
