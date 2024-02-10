@@ -1,6 +1,6 @@
 import Foundation
 
-actor GitHubAPIClient {
+actor GitHubAPIClient: GitHubAPIClientForSearcher {
     enum FetchError: Error {
         case makeUrlFailed
     }

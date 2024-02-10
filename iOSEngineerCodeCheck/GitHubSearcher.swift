@@ -1,9 +1,13 @@
 import Combine
 import Foundation
 
+protocol GitHubAPIClientForSearcher {
+    func fetchRepositories(word: String) async throws -> [GitHubRepository]
+}
+
 @MainActor
 final class GitHubSearcher {
-    private let apiClient: GitHubAPIClient = .init()
+    private let apiClient: GitHubAPIClientForSearcher
 
     private let repositoriesSubject: CurrentValueSubject<[GitHubRepository], Never> = .init([])
     var repositories: [GitHubRepository] { repositoriesSubject.value }
@@ -12,6 +16,10 @@ final class GitHubSearcher {
     }
 
     private var task: Task<Void, Error>?
+
+    init(apiClient: GitHubAPIClientForSearcher = GitHubAPIClient()) {
+        self.apiClient = apiClient
+    }
 
     func search(word: String) {
         guard word.count > 0 else { return }
