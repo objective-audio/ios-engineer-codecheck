@@ -4,9 +4,27 @@ import UIKit
 class MainViewController: UITableViewController {
     @IBOutlet weak var searchBar: UISearchBar!
 
+    private let router: NavigationRouter
     private let searcher: GitHubSearcher = .init()
     private var cancellables: Set<AnyCancellable> = []
     private var repositories: [GitHubRepository] { searcher.state.repositories }
+
+    static func make(router: NavigationRouter) -> MainViewController {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let main = storyboard.instantiateViewController(identifier: "Main") { coder in
+            MainViewController(coder: coder, router: router)
+        }
+        return main
+    }
+
+    required init?(coder: NSCoder, router: NavigationRouter) {
+        self.router = router
+        super.init(coder: coder)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -17,6 +35,11 @@ class MainViewController: UITableViewController {
         searcher.statePublisher.map(\.repositories).sink { [weak self] _ in
             self?.tableView.reloadData()
         }.store(in: &cancellables)
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        router.mainDidAppear()
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -42,8 +65,7 @@ class MainViewController: UITableViewController {
         guard indexPath.row < repositories.count else { return }
 
         let repository = repositories[indexPath.row]
-        let detail = DetailViewController.make(repository: repository)
-        navigationController?.pushViewController(detail, animated: true)
+        router.showDetail(.init(repository: repository))
     }
 }
 
