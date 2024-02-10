@@ -14,6 +14,28 @@ private actor APIClientMock: GitHubAPIClientForSearcher {
     }
 }
 
+private enum GitHubSearcherMatchState {
+    case initial
+    case loading([GitHubRepository])
+    case loaded([GitHubRepository])
+    case failed([GitHubRepository])
+}
+
+extension GitHubSearcherState {
+    fileprivate func isMatch(_ rhs: GitHubSearcherMatchState) -> Bool {
+        switch (self, rhs) {
+        case (.initial, .initial):
+            true
+        case (.loading(_, let lhsRepos), .loading(let rhsRepos)),
+            (.loaded(let lhsRepos), .loaded(let rhsRepos)),
+            (.failed(_, let lhsRepos), .failed(let rhsRepos)):
+            lhsRepos == rhsRepos
+        default:
+            false
+        }
+    }
+}
+
 @MainActor
 final class GitHubSearcherTests: XCTestCase {
     override func setUpWithError() throws {
@@ -40,16 +62,16 @@ final class GitHubSearcherTests: XCTestCase {
             }
         }
 
-        XCTAssertEqual(searcher.state.repositories, [])
+        XCTAssertTrue(searcher.state.isMatch(.initial))
         XCTAssertEqual(received.count, 1)
-        XCTAssertEqual(received[0].repositories, [])
+        XCTAssertTrue(received[0].isMatch(.initial))
 
         searcher.search(word: "hoge")
 
         wait(for: [expectation], timeout: 10.0)
 
-        XCTAssertEqual(searcher.state.repositories, repositories)
-        XCTAssertEqual(received.last?.repositories, repositories)
+        XCTAssertTrue(searcher.state.isMatch(.loaded(repositories)))
+        XCTAssertTrue(received.last?.isMatch(.loaded(repositories)) ?? false)
 
         canceller.cancel()
     }
