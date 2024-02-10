@@ -1,45 +1,52 @@
 import Combine
 import Foundation
 
-struct NavigationDetail {
+struct NavigationDetail: Equatable {
     let repository: GitHubRepository
 }
 
-enum NavigationElement {
+enum NavigationRouterState {
+    case initial
+    case main
+    case detail(NavigationDetail)
+}
+
+enum NavigationElement: Equatable {
     case main
     case detail(NavigationDetail)
 }
 
 final class NavigationRouter {
-    private let detailSubject: CurrentValueSubject<NavigationDetail?, Never> = .init(nil)
+    private let stateSubject: CurrentValueSubject<NavigationRouterState, Never> = .init(.initial)
 
     var elements: [NavigationElement] {
-        detailSubject.value.elements
+        stateSubject.value.elements
     }
 
     var elementsPublisher: AnyPublisher<[NavigationElement], Never> {
-        detailSubject.map(\.elements).eraseToAnyPublisher()
+        stateSubject.map(\.elements).eraseToAnyPublisher()
     }
 
     func mainDidAppear() {
-        detailSubject.value = nil
+        stateSubject.value = .main
     }
 
     func showDetail(_ detail: NavigationDetail) {
-        guard detailSubject.value == nil else {
+        guard case .main = stateSubject.value else {
             return
         }
 
-        detailSubject.value = detail
+        stateSubject.value = .detail(detail)
     }
 }
 
-extension NavigationDetail? {
+extension NavigationRouterState {
     fileprivate var elements: [NavigationElement] {
-        if let detail = self {
-            [.main, .detail(detail)]
-        } else {
+        switch self {
+        case .initial, .main:
             [.main]
+        case let .detail(detail):
+            [.main, .detail(detail)]
         }
     }
 }
