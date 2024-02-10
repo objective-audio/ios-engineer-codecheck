@@ -28,8 +28,12 @@ final class GitHubSearcher {
         state.task?.cancel()
 
         let task = Task {
-            let repositories = try await apiClient.fetchRepositories(word: word)
-            state = .loaded(repositories)
+            do {
+                let repositories = try await apiClient.fetchRepositories(word: word)
+                state = .loaded(repositories)
+            } catch {
+                state = .failed(error, state.repositories)
+            }
         }
 
         state = .loading(task, state.repositories)

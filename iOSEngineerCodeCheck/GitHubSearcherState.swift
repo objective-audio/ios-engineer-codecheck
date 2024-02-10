@@ -2,7 +2,7 @@ import Foundation
 
 enum GitHubSearcherState {
     case initial
-    case loading(Task<Void, Error>, [GitHubRepository])
+    case loading(Task<Void, Never>, [GitHubRepository])
     case loaded([GitHubRepository])
     case failed(Error, [GitHubRepository])
 }
@@ -17,7 +17,7 @@ extension GitHubSearcherState {
         }
     }
 
-    var task: Task<Void, Error>? {
+    var task: Task<Void, Never>? {
         switch self {
         case .loading(let task, _):
             task
