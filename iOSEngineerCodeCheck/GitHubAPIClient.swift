@@ -1,8 +1,18 @@
 import Foundation
 
+protocol URLSessionForGitHubAPIClient {
+    func data(for url: URL) async throws -> Data
+}
+
 actor GitHubAPIClient: GitHubAPIClientForSearcher {
     enum FetchError: Error {
         case makeUrlFailed
+    }
+
+    private let urlSession: URLSessionForGitHubAPIClient
+
+    init(urlSession: URLSessionForGitHubAPIClient = URLSession.shared) {
+        self.urlSession = urlSession
     }
 
     func fetchRepositories(word: String) async throws -> [GitHubRepository] {
@@ -13,7 +23,7 @@ actor GitHubAPIClient: GitHubAPIClientForSearcher {
             throw FetchError.makeUrlFailed
         }
 
-        let (data, _) = try await URLSession.shared.data(for: .init(url: url))
+        let data = try await urlSession.data(for: url)
 
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase

@@ -23,6 +23,7 @@
 		B636A9172B77558E0084CD0A /* RootNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B636A9162B77558E0084CD0A /* RootNavigationController.swift */; };
 		B636A9192B77560A0084CD0A /* NavigationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B636A9182B7756090084CD0A /* NavigationRouter.swift */; };
 		B69AD34B2B779B6E0051CC84 /* NavigationRouterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69AD34A2B779B6E0051CC84 /* NavigationRouterTests.swift */; };
+		B69AD34D2B77A5F50051CC84 /* URLSessionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69AD34C2B77A5F50051CC84 /* URLSessionExtension.swift */; };
 		BF0A658D244F2A3B00280FA6 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0A658C244F2A3B00280FA6 /* DetailViewController.swift */; };
 		BFD945DF244DC5E80012785A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD945DE244DC5E80012785A /* AppDelegate.swift */; };
 		BFD945E1244DC5E80012785A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD945E0244DC5E80012785A /* SceneDelegate.swift */; };
@@ -68,6 +69,7 @@
 		B636A9162B77558E0084CD0A /* RootNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootNavigationController.swift; sourceTree = "<group>"; };
 		B636A9182B7756090084CD0A /* NavigationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationRouter.swift; sourceTree = "<group>"; };
 		B69AD34A2B779B6E0051CC84 /* NavigationRouterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationRouterTests.swift; sourceTree = "<group>"; };
+		B69AD34C2B77A5F50051CC84 /* URLSessionExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionExtension.swift; sourceTree = "<group>"; };
 		BF0A658C244F2A3B00280FA6 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		BFD945DB244DC5E80012785A /* iOSEngineerCodeCheck.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSEngineerCodeCheck.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFD945DE244DC5E80012785A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -146,6 +148,7 @@
 				B636A8F02B749DD40084CD0A /* GitHubRepository.swift */,
 				B636A8F42B74B6720084CD0A /* GitHubAPIClient.swift */,
 				B636A8F22B74AA9A0084CD0A /* ImageDownloader.swift */,
+				B69AD34C2B77A5F50051CC84 /* URLSessionExtension.swift */,
 				BFD945E4244DC5E80012785A /* Main.storyboard */,
 				BFD945E7244DC5EB0012785A /* Assets.xcassets */,
 				BFD945E9244DC5EB0012785A /* LaunchScreen.storyboard */,
@@ -339,6 +342,7 @@
 				B636A9172B77558E0084CD0A /* RootNavigationController.swift in Sources */,
 				B636A8F12B749DD40084CD0A /* GitHubRepository.swift in Sources */,
 				BFD945DF244DC5E80012785A /* AppDelegate.swift in Sources */,
+				B69AD34D2B77A5F50051CC84 /* URLSessionExtension.swift in Sources */,
 				B636A8F52B74B6720084CD0A /* GitHubAPIClient.swift in Sources */,
 				B636A8F32B74AA9A0084CD0A /* ImageDownloader.swift in Sources */,
 				B636A9192B77560A0084CD0A /* NavigationRouter.swift in Sources */,
