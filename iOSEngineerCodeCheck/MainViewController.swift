@@ -5,20 +5,22 @@ class MainViewController: UITableViewController {
     @IBOutlet weak var searchBar: UISearchBar!
 
     private unowned let router: NavigationRouter
-    private let searcher: GitHubSearcher = .init()
+    private unowned let searcher: GitHubSearcher
     private var cancellables: Set<AnyCancellable> = []
     private var repositories: [GitHubRepository] { searcher.state.repositories }
 
     static func make() -> MainViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let main = storyboard.instantiateViewController(identifier: "Main") { coder in
-            MainViewController(coder: coder, router: App.shared.router)
+            MainViewController(
+                coder: coder, router: App.shared.router, searcher: App.shared.searcher)
         }
         return main
     }
 
-    required init?(coder: NSCoder, router: NavigationRouter) {
+    required init?(coder: NSCoder, router: NavigationRouter, searcher: GitHubSearcher) {
         self.router = router
+        self.searcher = searcher
         super.init(coder: coder)
     }
 
