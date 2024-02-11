@@ -15,10 +15,14 @@ class DetailViewController: UIViewController {
 
     private var cancellables: Set<AnyCancellable> = []
 
-    static func make(repository: GitHubRepository) -> DetailViewController {
+    static func make(repositoryIndex: Int) -> DetailViewController? {
+        let repositories = App.shared.searcher.state.repositories
+
+        guard repositoryIndex < repositories.count else { return nil }
+
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let detail = storyboard.instantiateViewController(identifier: "Detail") { coder in
-            DetailViewController(coder: coder, repository: repository)
+            DetailViewController(coder: coder, repository: repositories[repositoryIndex])
         }
         return detail
     }

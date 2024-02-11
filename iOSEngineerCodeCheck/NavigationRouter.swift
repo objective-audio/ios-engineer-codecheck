@@ -2,7 +2,7 @@ import Combine
 import Foundation
 
 struct NavigationDetail: Equatable {
-    let repository: GitHubRepository
+    let repositoryIndex: Int
 }
 
 enum NavigationRouterState {

@@ -64,10 +64,7 @@ class MainViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard indexPath.row < repositories.count else { return }
-
-        let repository = repositories[indexPath.row]
-        router.showDetail(.init(repository: repository))
+        router.showDetail(.init(repositoryIndex: indexPath.row))
     }
 }
 
