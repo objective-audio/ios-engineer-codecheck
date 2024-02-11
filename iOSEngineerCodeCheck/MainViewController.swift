@@ -6,7 +6,6 @@ class MainViewController: UITableViewController {
 
     private let presenter: MainPresenter
     private var cancellables: Set<AnyCancellable> = []
-    private var repositories: [GitHubRepository] { presenter.repositories }
 
     static func make() -> MainViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -33,7 +32,7 @@ class MainViewController: UITableViewController {
         searchBar.placeholder = "GitHubのリポジトリを検索できるよー"
         searchBar.delegate = self
 
-        presenter.repositoriesPublisher.sink { [weak self] _ in
+        presenter.contentsPublisher.sink { [weak self] _ in
             self?.tableView.reloadData()
         }.store(in: &cancellables)
     }
@@ -44,7 +43,7 @@ class MainViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return repositories.count
+        return presenter.contents.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath)
@@ -52,10 +51,10 @@ class MainViewController: UITableViewController {
     {
         let cell = UITableViewCell()
 
-        if indexPath.row < repositories.count {
-            let repository = repositories[indexPath.row]
-            cell.textLabel?.text = repository.fullName
-            cell.detailTextLabel?.text = repository.language
+        if indexPath.row < presenter.contents.count {
+            let content = presenter.contents[indexPath.row]
+            cell.textLabel?.text = content.fullName
+            cell.detailTextLabel?.text = content.language
             cell.tag = indexPath.row
         }
 

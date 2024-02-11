@@ -6,17 +6,20 @@ final class MainPresenter {
     private unowned let router: NavigationRouter
     private unowned let searcher: GitHubSearcher
 
-    var repositories: [GitHubRepository] {
-        searcher.state.repositories
+    private let contentsSubject: CurrentValueSubject<[MainCellContent], Never> = .init([])
+    var contents: [MainCellContent] { contentsSubject.value }
+    var contentsPublisher: AnyPublisher<[MainCellContent], Never> {
+        contentsSubject.eraseToAnyPublisher()
     }
 
-    var repositoriesPublisher: AnyPublisher<[GitHubRepository], Never> {
-        searcher.statePublisher.map(\.repositories).eraseToAnyPublisher()
-    }
+    private var cancellables: Set<AnyCancellable> = []
 
     init(router: NavigationRouter, searcher: GitHubSearcher) {
         self.router = router
         self.searcher = searcher
+
+        searcher.statePublisher.map(\.mainCellContents).subscribe(contentsSubject).store(
+            in: &cancellables)
     }
 
     func search(word: String) {
@@ -33,5 +36,17 @@ final class MainPresenter {
 
     func showDetail(at index: Int) {
         router.showDetail(.init(repositoryIndex: index))
+    }
+}
+
+extension GitHubSearcherState {
+    fileprivate var mainCellContents: [MainCellContent] {
+        repositories.map(\.mainCellContent)
+    }
+}
+
+extension GitHubRepository {
+    fileprivate var mainCellContent: MainCellContent {
+        .init(fullName: fullName, language: language)
     }
 }
