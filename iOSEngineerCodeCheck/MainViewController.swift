@@ -52,9 +52,13 @@ class MainViewController: UITableViewController {
         let cell = UITableViewCell()
 
         if indexPath.row < presenter.contents.count {
-            let content = presenter.contents[indexPath.row]
-            cell.textLabel?.text = content.fullName
-            cell.detailTextLabel?.text = content.language
+            let contents = presenter.contents[indexPath.row]
+
+            var configuration = cell.defaultContentConfiguration()
+            configuration.text = contents.fullName
+            configuration.secondaryText = contents.language
+            cell.contentConfiguration = configuration
+
             cell.tag = indexPath.row
         }
 
