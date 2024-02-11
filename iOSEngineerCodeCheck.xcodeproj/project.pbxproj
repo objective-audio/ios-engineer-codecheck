@@ -33,7 +33,9 @@
 		B69AD35C2B78BE6F0051CC84 /* UITestContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69AD35B2B78BE6F0051CC84 /* UITestContext.swift */; };
 		B69AD3602B78C31E0051CC84 /* UITestContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69AD35F2B78C31E0051CC84 /* UITestContext.swift */; };
 		B69AD3642B78DB740051CC84 /* GitHubRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69AD3632B78DB740051CC84 /* GitHubRepository.swift */; };
-		BF0A658D244F2A3B00280FA6 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0A658C244F2A3B00280FA6 /* DetailViewController.swift */; };
+		B69AD3662B7904980051CC84 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69AD3652B7904980051CC84 /* DetailView.swift */; };
+		B69AD3682B7909560051CC84 /* DetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69AD3672B7909560051CC84 /* DetailPresenter.swift */; };
+		B69AD36A2B790E4E0051CC84 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69AD3692B790E4E0051CC84 /* DetailViewController.swift */; };
 		BFD945DF244DC5E80012785A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD945DE244DC5E80012785A /* AppDelegate.swift */; };
 		BFD945E1244DC5E80012785A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD945E0244DC5E80012785A /* SceneDelegate.swift */; };
 		BFD945E3244DC5E80012785A /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD945E2244DC5E80012785A /* MainViewController.swift */; };
@@ -88,7 +90,9 @@
 		B69AD35B2B78BE6F0051CC84 /* UITestContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITestContext.swift; sourceTree = "<group>"; };
 		B69AD35F2B78C31E0051CC84 /* UITestContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UITestContext.swift; path = iOSEngineerCodeCheck/UITestContext.swift; sourceTree = SOURCE_ROOT; };
 		B69AD3632B78DB740051CC84 /* GitHubRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GitHubRepository.swift; path = iOSEngineerCodeCheck/GitHubRepository.swift; sourceTree = SOURCE_ROOT; };
-		BF0A658C244F2A3B00280FA6 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		B69AD3652B7904980051CC84 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
+		B69AD3672B7909560051CC84 /* DetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPresenter.swift; sourceTree = "<group>"; };
+		B69AD3692B790E4E0051CC84 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		BFD945DB244DC5E80012785A /* iOSEngineerCodeCheck.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSEngineerCodeCheck.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFD945DE244DC5E80012785A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BFD945E0244DC5E80012785A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -162,7 +166,9 @@
 				B69AD3542B7854050051CC84 /* MainPresenter.swift */,
 				B69AD3582B7866AA0051CC84 /* MainController.swift */,
 				B69AD3562B7855F50051CC84 /* MainCellContent.swift */,
-				BF0A658C244F2A3B00280FA6 /* DetailViewController.swift */,
+				B69AD3692B790E4E0051CC84 /* DetailViewController.swift */,
+				B69AD3652B7904980051CC84 /* DetailView.swift */,
+				B69AD3672B7909560051CC84 /* DetailPresenter.swift */,
 				B636A8F82B74F3730084CD0A /* ImageCache.swift */,
 				B636A8FA2B74FB400084CD0A /* ImageCacheState.swift */,
 				B636A90C2B76F40B0084CD0A /* GitHubSearcher.swift */,
@@ -363,10 +369,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				BFD945E3244DC5E80012785A /* MainViewController.swift in Sources */,
-				BF0A658D244F2A3B00280FA6 /* DetailViewController.swift in Sources */,
 				B636A9152B770EBB0084CD0A /* GitHubSearcherState.swift in Sources */,
 				B69AD3532B7848FF0051CC84 /* App.swift in Sources */,
 				B69AD35C2B78BE6F0051CC84 /* UITestContext.swift in Sources */,
+				B69AD3682B7909560051CC84 /* DetailPresenter.swift in Sources */,
 				B69AD3592B7866AA0051CC84 /* MainController.swift in Sources */,
 				B636A90D2B76F40B0084CD0A /* GitHubSearcher.swift in Sources */,
 				B636A8F92B74F3730084CD0A /* ImageCache.swift in Sources */,
@@ -374,7 +380,9 @@
 				B69AD3572B7855F50051CC84 /* MainCellContent.swift in Sources */,
 				B636A8F12B749DD40084CD0A /* GitHubRepository.swift in Sources */,
 				BFD945DF244DC5E80012785A /* AppDelegate.swift in Sources */,
+				B69AD36A2B790E4E0051CC84 /* DetailViewController.swift in Sources */,
 				B69AD34D2B77A5F50051CC84 /* URLSessionExtension.swift in Sources */,
+				B69AD3662B7904980051CC84 /* DetailView.swift in Sources */,
 				B636A8F52B74B6720084CD0A /* GitHubAPIClient.swift in Sources */,
 				B69AD3552B7854050051CC84 /* MainPresenter.swift in Sources */,
 				B636A8F32B74AA9A0084CD0A /* ImageDownloader.swift in Sources */,
