@@ -2,7 +2,7 @@ import Combine
 import UIKit
 
 class RootNavigationController: UINavigationController {
-    private let router: NavigationRouter = .init()
+    private unowned let router: NavigationRouter = App.shared.router
     private var cancellables: Set<AnyCancellable> = []
 
     override func viewDidLoad() {
@@ -33,7 +33,7 @@ class RootNavigationController: UINavigationController {
     private func makeViewController(element: NavigationElement) -> UIViewController {
         switch element {
         case .main:
-            MainViewController.make(router: router)
+            MainViewController.make()
         case let .detail(detail):
             DetailViewController.make(repository: detail.repository)
         }
