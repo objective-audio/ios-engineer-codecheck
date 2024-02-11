@@ -20,16 +20,19 @@ class DetailViewController: UIViewController {
 
         guard repositoryIndex < repositories.count else { return nil }
 
+        let imageCache = App.shared.makeImageCache()
+
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let detail = storyboard.instantiateViewController(identifier: "Detail") { coder in
-            DetailViewController(coder: coder, repository: repositories[repositoryIndex])
+            DetailViewController(
+                coder: coder, repository: repositories[repositoryIndex], imageCache: imageCache)
         }
         return detail
     }
 
-    required init?(coder: NSCoder, repository: GitHubRepository) {
+    required init?(coder: NSCoder, repository: GitHubRepository, imageCache: ImageCache) {
         self.repository = repository
-        imageCache = .init()
+        self.imageCache = imageCache
         super.init(coder: coder)
     }
 

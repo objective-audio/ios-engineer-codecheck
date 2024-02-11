@@ -1,43 +1,62 @@
-//
-//  iOSEngineerCodeCheckUITests.swift
-//  iOSEngineerCodeCheckUITests
-//
-//  Created by 史 翔新 on 2020/04/20.
-//  Copyright © 2020 YUMEMI Inc. All rights reserved.
-//
-
 import XCTest
 
 class iOSEngineerCodeCheckUITests: XCTestCase {
-
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-
-        // In UI tests it is usually best to stop immediately when a failure occurs.
         continueAfterFailure = false
-
-        // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
     }
 
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testExample() throws {
-        // UI tests must launch the application that they test.
+    func test_検索して詳細画面を表示() throws {
+        let repositories: [GitHubRepository] = [
+            .init(
+                fullName: "full-name-1", language: "PHP",
+                owner: .init(avatarUrl: "https://example.com/eraser"),
+                stargazersCount: 11, watchersCount: 12, forksCount: 13, openIssuesCount: 14),
+            .init(
+                fullName: "full-name-2", language: "Java",
+                owner: .init(avatarUrl: "https://example.com/trash"),
+                stargazersCount: 21, watchersCount: 22, forksCount: 23, openIssuesCount: 24),
+        ]
+
         let app = XCUIApplication()
+        let context = UITestContext(repositories: repositories)
+        guard let json = context.encodeToJson() else {
+            XCTFail()
+            return
+        }
+        app.launchEnvironment = [UITestContext.environmentKey: json]
         app.launch()
 
-        // Use recording to get started writing UI tests.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
+        XCTContext.runActivity(named: "検索フィールドのテキストを入力して確定") { _ in
+            let searchField = app.searchFields.firstMatch
+            searchField.tap()
+            searchField.typeText("dummy")
+            app.buttons["Search"].tap()
+        }
 
-    func testLaunchPerformance() throws {
-        if #available(macOS 10.15, iOS 13.0, tvOS 13.0, *) {
-            // This measures how long it takes to launch your application.
-            measure(metrics: [XCTApplicationLaunchMetric()]) {
-                XCUIApplication().launch()
-            }
+        XCTContext.runActivity(named: "TableViewに取得したリポジトリが表示される") { _ in
+            let cells = app.tables.cells.allElementsBoundByIndex
+            XCTAssertEqual(cells.count, 2)
+
+            XCTAssertTrue(cells[0].staticTexts["full-name-1"].exists)
+            XCTAssertTrue(cells[0].staticTexts["PHP"].exists)
+            XCTAssertTrue(cells[1].staticTexts["full-name-2"].exists)
+            XCTAssertTrue(cells[1].staticTexts["Java"].exists)
+        }
+
+        XCTContext.runActivity(named: "1つ目のセルをタップしDetailが表示される") { _ in
+            app.tables.cells.element(boundBy: 0).tap()
+
+            XCTAssertTrue(app.staticTexts["full-name-1"].exists)
+            XCTAssertTrue(app.staticTexts["Written in PHP"].exists)
+            XCTAssertTrue(app.staticTexts["11 stars"].exists)
+            XCTAssertTrue(app.staticTexts["12 watchers"].exists)
+            XCTAssertTrue(app.staticTexts["13 forks"].exists)
+            XCTAssertTrue(app.staticTexts["14 open issues"].exists)
+
+            XCTAssertTrue(app.images["eraser"].exists)
         }
     }
 }
