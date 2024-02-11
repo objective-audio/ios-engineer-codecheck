@@ -4,23 +4,22 @@ import UIKit
 class MainViewController: UITableViewController {
     @IBOutlet weak var searchBar: UISearchBar!
 
-    private unowned let router: NavigationRouter
-    private unowned let searcher: GitHubSearcher
+    private let presenter: MainPresenter
     private var cancellables: Set<AnyCancellable> = []
-    private var repositories: [GitHubRepository] { searcher.state.repositories }
+    private var repositories: [GitHubRepository] { presenter.repositories }
 
     static func make() -> MainViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let main = storyboard.instantiateViewController(identifier: "Main") { coder in
             MainViewController(
-                coder: coder, router: App.shared.router, searcher: App.shared.searcher)
+                coder: coder,
+                presenter: .init(router: App.shared.router, searcher: App.shared.searcher))
         }
         return main
     }
 
-    required init?(coder: NSCoder, router: NavigationRouter, searcher: GitHubSearcher) {
-        self.router = router
-        self.searcher = searcher
+    required init?(coder: NSCoder, presenter: MainPresenter) {
+        self.presenter = presenter
         super.init(coder: coder)
     }
 
@@ -34,14 +33,14 @@ class MainViewController: UITableViewController {
         searchBar.placeholder = "GitHubのリポジトリを検索できるよー"
         searchBar.delegate = self
 
-        searcher.statePublisher.map(\.repositories).sink { [weak self] _ in
+        presenter.repositoriesPublisher.sink { [weak self] _ in
             self?.tableView.reloadData()
         }.store(in: &cancellables)
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        router.mainDidAppear()
+        presenter.didAppear()
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -64,16 +63,16 @@ class MainViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        router.showDetail(.init(repositoryIndex: indexPath.row))
+        presenter.showDetail(at: indexPath.row)
     }
 }
 
 extension MainViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        searcher.cancel()
+        presenter.cancelSearch()
     }
 
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        searcher.search(word: searchBar.text ?? "")
+        presenter.search(word: searchBar.text ?? "")
     }
 }
