@@ -29,6 +29,7 @@
 		B69AD3532B7848FF0051CC84 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69AD3522B7848FF0051CC84 /* App.swift */; };
 		B69AD3552B7854050051CC84 /* MainPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69AD3542B7854050051CC84 /* MainPresenter.swift */; };
 		B69AD3572B7855F50051CC84 /* MainCellContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69AD3562B7855F50051CC84 /* MainCellContent.swift */; };
+		B69AD3592B7866AA0051CC84 /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69AD3582B7866AA0051CC84 /* MainController.swift */; };
 		BF0A658D244F2A3B00280FA6 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0A658C244F2A3B00280FA6 /* DetailViewController.swift */; };
 		BFD945DF244DC5E80012785A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD945DE244DC5E80012785A /* AppDelegate.swift */; };
 		BFD945E1244DC5E80012785A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD945E0244DC5E80012785A /* SceneDelegate.swift */; };
@@ -80,6 +81,7 @@
 		B69AD3522B7848FF0051CC84 /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		B69AD3542B7854050051CC84 /* MainPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPresenter.swift; sourceTree = "<group>"; };
 		B69AD3562B7855F50051CC84 /* MainCellContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCellContent.swift; sourceTree = "<group>"; };
+		B69AD3582B7866AA0051CC84 /* MainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
 		BF0A658C244F2A3B00280FA6 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		BFD945DB244DC5E80012785A /* iOSEngineerCodeCheck.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSEngineerCodeCheck.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFD945DE244DC5E80012785A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -152,6 +154,7 @@
 				B636A9182B7756090084CD0A /* NavigationRouter.swift */,
 				BFD945E2244DC5E80012785A /* MainViewController.swift */,
 				B69AD3542B7854050051CC84 /* MainPresenter.swift */,
+				B69AD3582B7866AA0051CC84 /* MainController.swift */,
 				B69AD3562B7855F50051CC84 /* MainCellContent.swift */,
 				BF0A658C244F2A3B00280FA6 /* DetailViewController.swift */,
 				B636A8F82B74F3730084CD0A /* ImageCache.swift */,
@@ -354,6 +357,7 @@
 				BF0A658D244F2A3B00280FA6 /* DetailViewController.swift in Sources */,
 				B636A9152B770EBB0084CD0A /* GitHubSearcherState.swift in Sources */,
 				B69AD3532B7848FF0051CC84 /* App.swift in Sources */,
+				B69AD3592B7866AA0051CC84 /* MainController.swift in Sources */,
 				B636A90D2B76F40B0084CD0A /* GitHubSearcher.swift in Sources */,
 				B636A8F92B74F3730084CD0A /* ImageCache.swift in Sources */,
 				B636A9172B77558E0084CD0A /* RootNavigationController.swift in Sources */,

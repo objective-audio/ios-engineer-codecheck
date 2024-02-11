@@ -5,6 +5,7 @@ class MainViewController: UITableViewController {
     @IBOutlet weak var searchBar: UISearchBar!
 
     private let presenter: MainPresenter
+    private let controller: MainController
     private var cancellables: Set<AnyCancellable> = []
 
     static func make() -> MainViewController {
@@ -12,13 +13,15 @@ class MainViewController: UITableViewController {
         let main = storyboard.instantiateViewController(identifier: "Main") { coder in
             MainViewController(
                 coder: coder,
-                presenter: .init(router: App.shared.router, searcher: App.shared.searcher))
+                presenter: .init(searcher: App.shared.searcher),
+                controller: .init(router: App.shared.router, searcher: App.shared.searcher))
         }
         return main
     }
 
-    required init?(coder: NSCoder, presenter: MainPresenter) {
+    required init?(coder: NSCoder, presenter: MainPresenter, controller: MainController) {
         self.presenter = presenter
+        self.controller = controller
         super.init(coder: coder)
     }
 
@@ -39,7 +42,7 @@ class MainViewController: UITableViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        presenter.didAppear()
+        controller.didAppear()
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -66,16 +69,16 @@ class MainViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        presenter.showDetail(at: indexPath.row)
+        controller.showDetail(at: indexPath.row)
     }
 }
 
 extension MainViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        presenter.cancelSearch()
+        controller.cancelSearch()
     }
 
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        presenter.search(word: searchBar.text ?? "")
+        controller.search(word: searchBar.text ?? "")
     }
 }
