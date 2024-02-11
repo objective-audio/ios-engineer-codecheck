@@ -4,7 +4,7 @@ import Foundation
 final class App {
     static let shared: App = .init(uiTestContext: .environmentValue)
 
-    let uiTestContext: UITestContext?
+    private let uiTestContext: UITestContext?
     let router: NavigationRouter = .init()
     let searcher: GitHubSearcher
 
