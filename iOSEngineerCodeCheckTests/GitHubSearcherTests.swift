@@ -2,15 +2,19 @@ import XCTest
 
 @testable import iOSEngineerCodeCheck
 
-private actor APIClientMock: GitHubAPIClientForSearcher {
-    let result: Result<[GitHubRepository], Error>
+private final class APIClientMock: GitHubAPIClientForSearcher {
+    let handler: (CheckedContinuation<[GitHubRepository], Error>) -> Void
 
-    init(result: Result<[GitHubRepository], Error>) {
-        self.result = result
+    init(
+        handler: @escaping (CheckedContinuation<[GitHubRepository], Error>) -> Void
+    ) {
+        self.handler = handler
     }
 
     func searchRepositories(word: String) async throws -> [GitHubRepository] {
-        try result.get()
+        try await withCheckedThrowingContinuation { continuation in
+            handler(continuation)
+        }
     }
 }
 
@@ -48,7 +52,9 @@ final class GitHubSearcherTests: XCTestCase {
         let repositories: [GitHubRepository] = [
             .init(testFullName: "foo"), .init(testFullName: "bar"),
         ]
-        let apiClient = APIClientMock(result: .success(repositories))
+        let apiClient = APIClientMock { continuation in
+            continuation.resume(returning: repositories)
+        }
         let searcher = GitHubSearcher(apiClient: apiClient)
 
         var received: [GitHubSearcherState] = []
@@ -80,7 +86,9 @@ final class GitHubSearcherTests: XCTestCase {
     }
 
     func test_検索が失敗してデータは空のまま() {
-        let apiClient = APIClientMock(result: .failure(TestError.dummy))
+        let apiClient = APIClientMock { continuation in
+            continuation.resume(throwing: TestError.dummy)
+        }
         let searcher = GitHubSearcher(apiClient: apiClient)
 
         var received: [GitHubSearcherState] = []
