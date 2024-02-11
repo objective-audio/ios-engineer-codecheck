@@ -4,23 +4,24 @@ import UIKit
 class MainViewController: UITableViewController {
     @IBOutlet weak var searchBar: UISearchBar!
 
-    private unowned let router: NavigationRouter
-    private unowned let searcher: GitHubSearcher
+    private let presenter: MainPresenter
+    private let controller: MainController
     private var cancellables: Set<AnyCancellable> = []
-    private var repositories: [GitHubRepository] { searcher.state.repositories }
 
     static func make() -> MainViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let main = storyboard.instantiateViewController(identifier: "Main") { coder in
             MainViewController(
-                coder: coder, router: App.shared.router, searcher: App.shared.searcher)
+                coder: coder,
+                presenter: .init(searcher: App.shared.searcher),
+                controller: .init(router: App.shared.router, searcher: App.shared.searcher))
         }
         return main
     }
 
-    required init?(coder: NSCoder, router: NavigationRouter, searcher: GitHubSearcher) {
-        self.router = router
-        self.searcher = searcher
+    required init?(coder: NSCoder, presenter: MainPresenter, controller: MainController) {
+        self.presenter = presenter
+        self.controller = controller
         super.init(coder: coder)
     }
 
@@ -34,18 +35,18 @@ class MainViewController: UITableViewController {
         searchBar.placeholder = "GitHubのリポジトリを検索できるよー"
         searchBar.delegate = self
 
-        searcher.statePublisher.map(\.repositories).sink { [weak self] _ in
+        presenter.contentsPublisher.sink { [weak self] _ in
             self?.tableView.reloadData()
         }.store(in: &cancellables)
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        router.mainDidAppear()
+        controller.didAppear()
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return repositories.count
+        return presenter.contents.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath)
@@ -53,10 +54,14 @@ class MainViewController: UITableViewController {
     {
         let cell = UITableViewCell()
 
-        if indexPath.row < repositories.count {
-            let repository = repositories[indexPath.row]
-            cell.textLabel?.text = repository.fullName
-            cell.detailTextLabel?.text = repository.language
+        if indexPath.row < presenter.contents.count {
+            let contents = presenter.contents[indexPath.row]
+
+            var configuration = cell.defaultContentConfiguration()
+            configuration.text = contents.fullName
+            configuration.secondaryText = contents.language
+            cell.contentConfiguration = configuration
+
             cell.tag = indexPath.row
         }
 
@@ -64,16 +69,16 @@ class MainViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        router.showDetail(.init(repositoryIndex: indexPath.row))
+        controller.showDetail(at: indexPath.row)
     }
 }
 
 extension MainViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        searcher.cancel()
+        controller.cancelSearch()
     }
 
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        searcher.search(word: searchBar.text ?? "")
+        controller.search(word: searchBar.text ?? "")
     }
 }
