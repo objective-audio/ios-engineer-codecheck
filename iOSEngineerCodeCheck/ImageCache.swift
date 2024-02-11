@@ -20,7 +20,7 @@ final class ImageCache {
         stateSubject.eraseToAnyPublisher()
     }
 
-    init(downloader: DownloaderForImageCache = ImageDownloader()) {
+    init(downloader: DownloaderForImageCache) {
         self.downloader = downloader
     }
 

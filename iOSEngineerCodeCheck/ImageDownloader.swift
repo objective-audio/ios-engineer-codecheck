@@ -2,7 +2,7 @@ import Foundation
 
 import class UIKit.UIImage
 
-final class ImageDownloader: DownloaderForImageCache {
+actor ImageDownloader: DownloaderForImageCache {
     enum DownloadError: Error {
         case dataConvertFailed
     }
@@ -14,6 +14,19 @@ final class ImageDownloader: DownloaderForImageCache {
             throw DownloadError.dataConvertFailed
         }
 
+        return image
+    }
+}
+
+actor ImageDownloaderUITestMock: DownloaderForImageCache {
+    enum DownloadError: Error {
+        case makeImageFailed
+    }
+
+    func download(from url: URL) async throws -> UIImage {
+        guard let image = UIImage(systemName: url.lastPathComponent) else {
+            throw DownloadError.makeImageFailed
+        }
         return image
     }
 }

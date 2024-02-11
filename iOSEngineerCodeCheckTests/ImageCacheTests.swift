@@ -2,7 +2,7 @@ import XCTest
 
 @testable import iOSEngineerCodeCheck
 
-private final class DownloaderMock: DownloaderForImageCache {
+private actor DownloaderMock: DownloaderForImageCache {
     let result: Result<UIImage, Error>
 
     init(result: Result<UIImage, Error>) {

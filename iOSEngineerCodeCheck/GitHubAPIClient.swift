@@ -33,3 +33,15 @@ actor GitHubAPIClient: GitHubAPIClientForSearcher {
         return repositories.items
     }
 }
+
+actor GitHubAPIClientUITestMock: GitHubAPIClientForSearcher {
+    private let result: Result<[GitHubRepository], Error>
+
+    init(result: Result<[GitHubRepository], Error>) {
+        self.result = result
+    }
+
+    func searchRepositories(word: String) async throws -> [GitHubRepository] {
+        try result.get()
+    }
+}

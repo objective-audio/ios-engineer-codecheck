@@ -18,7 +18,7 @@ final class GitHubSearcher {
         stateSubject.eraseToAnyPublisher()
     }
 
-    init(apiClient: GitHubAPIClientForSearcher = GitHubAPIClient()) {
+    init(apiClient: GitHubAPIClientForSearcher) {
         self.apiClient = apiClient
     }
 
