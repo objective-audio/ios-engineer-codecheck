@@ -22,9 +22,7 @@ final class DetailPresenter: ObservableObject {
         self.repository = repository
         self.imageCache = imageCache
 
-        imageCache.imagePublisher.sink { [weak self] image in
-            self?.image = image
-        }.store(in: &cancellables)
+        imageCache.imagePublisher.assign(to: &$image)
 
         if let url = repository.avatarUrl {
             imageCache.load(url: url)
