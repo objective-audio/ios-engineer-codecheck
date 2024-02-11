@@ -118,4 +118,54 @@ final class GitHubSearcherTests: XCTestCase {
 
         canceller.cancel()
     }
+
+    func test_検索中にキャンセルしデータは空のまま() {
+        let repositories: [GitHubRepository] = [
+            .init(testFullName: "foo"), .init(testFullName: "bar"),
+        ]
+        let continuationExpectation = XCTestExpectation(description: "continuation")
+        var receivedContinuation: CheckedContinuation<[GitHubRepository], Error>?
+        let apiClient = APIClientMock { continuation in
+            receivedContinuation = continuation
+            continuationExpectation.fulfill()
+        }
+        let searcher = GitHubSearcher(apiClient: apiClient)
+
+        var received: [GitHubSearcherState] = []
+        let cancelledExpectation = XCTestExpectation(description: "cancelled")
+
+        let canceller = searcher.statePublisher.sink { state in
+            received.append(state)
+
+            if case .loaded = state {
+                cancelledExpectation.fulfill()
+            }
+        }
+
+        XCTAssertTrue(searcher.state.isMatch(.initial))
+        XCTAssertEqual(received.count, 1)
+        XCTAssertTrue(received[0].isMatch(.initial))
+
+        searcher.search(word: "hoge")
+
+        wait(for: [continuationExpectation], timeout: 10.0)
+
+        XCTAssertTrue(searcher.state.isMatch(.loading([])))
+
+        XCTAssertEqual(received.count, 2)
+        XCTAssertTrue(received[1].isMatch(.loading([])))
+
+        searcher.cancel()
+
+        receivedContinuation?.resume(returning: repositories)
+
+        wait(for: [cancelledExpectation], timeout: 10.0)
+
+        XCTAssertTrue(searcher.state.isMatch(.loaded([])))
+
+        XCTAssertEqual(received.count, 3)
+        XCTAssertTrue(received[2].isMatch(.loaded([])))
+
+        canceller.cancel()
+    }
 }
