@@ -2,7 +2,7 @@ import Combine
 import UIKit
 
 class RootNavigationController: UINavigationController {
-    private let router: NavigationRouter = .init()
+    private unowned let router: NavigationRouter = App.shared.router
     private var cancellables: Set<AnyCancellable> = []
 
     override func viewDidLoad() {
@@ -23,19 +23,20 @@ class RootNavigationController: UINavigationController {
         } else if previousCount < elements.count {
             var viewControllers = viewControllers
             for index in previousCount..<elements.count {
-                let viewController = makeViewController(element: elements[index])
-                viewControllers.append(viewController)
+                if let viewController = makeViewController(element: elements[index]) {
+                    viewControllers.append(viewController)
+                }
             }
             setViewControllers(viewControllers, animated: true)
         }
     }
 
-    private func makeViewController(element: NavigationElement) -> UIViewController {
+    private func makeViewController(element: NavigationElement) -> UIViewController? {
         switch element {
         case .main:
-            MainViewController.make(router: router)
+            MainViewController.make()
         case let .detail(detail):
-            DetailViewController.make(repository: detail.repository)
+            DetailViewController.make(repositoryIndex: detail.repositoryIndex)
         }
     }
 }

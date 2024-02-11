@@ -15,7 +15,7 @@ final class NavigationRouterTests: XCTestCase {
         XCTAssertEqual(router.elements, [.main])
 
         XCTContext.runActivity(named: "Mainが表示される前はDetailに遷移できない") { _ in
-            router.showDetail(.init(repository: .init(testFullName: "pre_appear")))
+            router.showDetail(.init(repositoryIndex: 0))
 
             XCTAssertEqual(router.elements, [.main])
         }
@@ -25,19 +25,19 @@ final class NavigationRouterTests: XCTestCase {
 
             XCTAssertEqual(router.elements, [.main])
 
-            router.showDetail(.init(repository: .init(testFullName: "main_appeared")))
+            router.showDetail(.init(repositoryIndex: 1))
 
             XCTAssertEqual(
                 router.elements,
-                [.main, .detail(.init(repository: .init(testFullName: "main_appeared")))])
+                [.main, .detail(.init(repositoryIndex: 1))])
         }
 
         XCTContext.runActivity(named: "Detail表示中は重複して遷移できない") { _ in
-            router.showDetail(.init(repository: .init(testFullName: "detail_appeared")))
+            router.showDetail(.init(repositoryIndex: 2))
 
             XCTAssertEqual(
                 router.elements,
-                [.main, .detail(.init(repository: .init(testFullName: "main_appeared")))])
+                [.main, .detail(.init(repositoryIndex: 1))])
         }
 
         XCTContext.runActivity(named: "Detail表示中にMainに戻る") { _ in
@@ -47,11 +47,11 @@ final class NavigationRouterTests: XCTestCase {
         }
 
         XCTContext.runActivity(named: "Mainに戻ったらDetailに遷移できる") { _ in
-            router.showDetail(.init(repository: .init(testFullName: "main_appeared")))
+            router.showDetail(.init(repositoryIndex: 3))
 
             XCTAssertEqual(
                 router.elements,
-                [.main, .detail(.init(repository: .init(testFullName: "main_appeared")))])
+                [.main, .detail(.init(repositoryIndex: 3))])
         }
     }
 
@@ -76,12 +76,12 @@ final class NavigationRouterTests: XCTestCase {
         }
 
         XCTContext.runActivity(named: "詳細画面が表示される・detailが追加") { _ in
-            router.showDetail(.init(repository: .init(testFullName: "show_detail")))
+            router.showDetail(.init(repositoryIndex: 0))
 
             XCTAssertEqual(received.count, 2)
             XCTAssertEqual(
                 received[1],
-                [.main, .detail(.init(repository: .init(testFullName: "show_detail")))])
+                [.main, .detail(.init(repositoryIndex: 0))])
         }
 
         XCTContext.runActivity(named: "メイン画面に戻る・detailが削除") { _ in
