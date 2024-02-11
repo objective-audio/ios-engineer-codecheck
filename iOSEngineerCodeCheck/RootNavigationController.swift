@@ -23,9 +23,9 @@ class RootNavigationController: UINavigationController {
         } else if previousCount < elements.count {
             var viewControllers = viewControllers
             for index in previousCount..<elements.count {
-                if let viewController = makeViewController(element: elements[index]) {
-                    viewControllers.append(viewController)
-                }
+                let viewController =
+                    makeViewController(element: elements[index]) ?? UIViewController()
+                viewControllers.append(viewController)
             }
             setViewControllers(viewControllers, animated: true)
         }
