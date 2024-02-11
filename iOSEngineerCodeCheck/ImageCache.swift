@@ -7,8 +7,7 @@ protocol DownloaderForImageCache {
     func download(from url: URL) async throws -> UIImage
 }
 
-@MainActor
-final class ImageCache {
+final class ImageCache: ImageCacheForPresenter {
     private let downloader: DownloaderForImageCache
     private let stateSubject: CurrentValueSubject<ImageCacheState, Never> = .init(.initial)
 
@@ -18,6 +17,10 @@ final class ImageCache {
 
     var statePublisher: AnyPublisher<ImageCacheState, Never> {
         stateSubject.eraseToAnyPublisher()
+    }
+
+    var imagePublisher: AnyPublisher<UIImage?, Never> {
+        statePublisher.map(\.image).eraseToAnyPublisher()
     }
 
     init(downloader: DownloaderForImageCache) {
