@@ -23,6 +23,7 @@ private enum GitHubSearcherMatchState {
     case loading([GitHubRepository])
     case loaded([GitHubRepository])
     case failed([GitHubRepository])
+    case cancelled([GitHubRepository])
 }
 
 extension GitHubSearcherState {
@@ -32,7 +33,8 @@ extension GitHubSearcherState {
             true
         case (.loading(_, let lhsRepos), .loading(let rhsRepos)),
             (.loaded(let lhsRepos), .loaded(let rhsRepos)),
-            (.failed(_, let lhsRepos), .failed(let rhsRepos)):
+            (.failed(_, let lhsRepos), .failed(let rhsRepos)),
+            (.cancelled(let lhsRepos), .cancelled(let rhsRepos)):
             lhsRepos == rhsRepos
         default:
             false
@@ -137,7 +139,7 @@ final class GitHubSearcherTests: XCTestCase {
         let canceller = searcher.statePublisher.sink { state in
             received.append(state)
 
-            if case .loaded = state {
+            if case .cancelled = state {
                 cancelledExpectation.fulfill()
             }
         }
@@ -161,10 +163,10 @@ final class GitHubSearcherTests: XCTestCase {
 
         wait(for: [cancelledExpectation], timeout: 10.0)
 
-        XCTAssertTrue(searcher.state.isMatch(.loaded([])))
+        XCTAssertTrue(searcher.state.isMatch(.cancelled([])))
 
         XCTAssertEqual(received.count, 3)
-        XCTAssertTrue(received[2].isMatch(.loaded([])))
+        XCTAssertTrue(received[2].isMatch(.cancelled([])))
 
         canceller.cancel()
     }
