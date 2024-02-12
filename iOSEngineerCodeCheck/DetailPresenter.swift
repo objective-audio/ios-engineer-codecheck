@@ -12,7 +12,6 @@ protocol ImageCacheForPresenter {
 @MainActor
 final class DetailPresenter: ObservableObject {
     let repository: GitHubRepository
-    let imageCache: ImageCacheForPresenter
 
     @Published var image: UIImage?
 
@@ -20,7 +19,6 @@ final class DetailPresenter: ObservableObject {
 
     init(repository: GitHubRepository, imageCache: ImageCacheForPresenter) {
         self.repository = repository
-        self.imageCache = imageCache
 
         imageCache.imagePublisher.assign(to: &$image)
 
