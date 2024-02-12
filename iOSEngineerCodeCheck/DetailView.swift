@@ -7,13 +7,24 @@ struct DetailView: View {
 
     var body: some View {
         List {
-            if let image = presenter.image {
-                Image(uiImage: image)
-                    .resizable()
-                    .aspectRatio(1.0, contentMode: .fit)
-                    .listRowSeparator(.hidden)
-                    .padding(.bottom)
+            Group {
+                switch presenter.imageContent {
+                case let .image(image):
+                    Image(uiImage: image)
+                        .resizable()
+                        .aspectRatio(1.0, contentMode: .fit)
+                case let .message(message):
+                    ZStack {
+                        Color(uiColor: .quaternarySystemFill)
+                            .aspectRatio(1.0, contentMode: .fill)
+                        Text(message.text)
+                            .foregroundStyle(.tertiary)
+                            .layoutPriority(-1)
+                    }
+                }
             }
+            .listRowSeparator(.hidden)
+            .padding(.bottom)
             Text(repository.fullName ?? "")
                 .font(.title)
                 .frame(maxWidth: .infinity, alignment: .center)
@@ -45,9 +56,20 @@ struct DetailView: View {
     }
 }
 
+extension DetailImageContent.Message {
+    fileprivate var text: String {
+        switch self {
+        case .loading:
+            "Loading..."
+        case .notFound:
+            "Not Found"
+        }
+    }
+}
+
 private final class PreviewImageCache: ImageCacheForPresenter {
-    var imagePublisher: AnyPublisher<UIImage?, Never> {
-        Just(UIImage(systemName: "eraser")).eraseToAnyPublisher()
+    var statePublisher: AnyPublisher<ImageCacheState, Never> {
+        Just(.loaded(UIImage(systemName: "eraser")!)).eraseToAnyPublisher()
     }
     func load(url: URL) {}
 }
