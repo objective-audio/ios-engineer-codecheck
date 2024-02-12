@@ -3,9 +3,19 @@ import Foundation
 
 import class UIKit.UIImage
 
+enum DetailImageContent {
+    enum Message {
+        case loading
+        case notFound
+    }
+
+    case image(UIImage)
+    case message(Message)
+}
+
 @MainActor
 protocol ImageCacheForPresenter {
-    var imagePublisher: AnyPublisher<UIImage?, Never> { get }
+    var statePublisher: AnyPublisher<ImageCacheState, Never> { get }
     func load(url: URL)
 }
 
@@ -13,17 +23,30 @@ protocol ImageCacheForPresenter {
 final class DetailPresenter: ObservableObject {
     let repository: GitHubRepository
 
-    @Published var image: UIImage?
+    @Published var imageContent: DetailImageContent = .message(.loading)
 
     private var cancellables: Set<AnyCancellable> = []
 
     init(repository: GitHubRepository, imageCache: ImageCacheForPresenter) {
         self.repository = repository
 
-        imageCache.imagePublisher.assign(to: &$image)
+        imageCache.statePublisher.map(\.content).assign(to: &$imageContent)
 
         if let url = repository.avatarUrl {
             imageCache.load(url: url)
+        }
+    }
+}
+
+extension ImageCacheState {
+    fileprivate var content: DetailImageContent {
+        switch self {
+        case .initial, .loading:
+            .message(.loading)
+        case let .loaded(image):
+            .image(image)
+        case .failed:
+            .message(.notFound)
         }
     }
 }
