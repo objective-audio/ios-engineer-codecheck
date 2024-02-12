@@ -91,7 +91,7 @@
 		B69AD3562B7855F50051CC84 /* MainContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainContent.swift; sourceTree = "<group>"; };
 		B69AD3582B7866AA0051CC84 /* MainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
 		B69AD35B2B78BE6F0051CC84 /* UITestContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITestContext.swift; sourceTree = "<group>"; };
-		B69AD35F2B78C31E0051CC84 /* UITestContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UITestContext.swift; path = iOSEngineerCodeCheck/Global/UITestContext.swift; sourceTree = SOURCE_ROOT; };
+		B69AD35F2B78C31E0051CC84 /* UITestContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UITestContext.swift; path = iOSEngineerCodeCheck/App/UITestContext.swift; sourceTree = SOURCE_ROOT; };
 		B69AD3632B78DB740051CC84 /* GitHubRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GitHubRepository.swift; path = iOSEngineerCodeCheck/App/GitHubRepository.swift; sourceTree = SOURCE_ROOT; };
 		B69AD3652B7904980051CC84 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		B69AD3672B7909560051CC84 /* DetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPresenter.swift; sourceTree = "<group>"; };
@@ -151,6 +151,7 @@
 				B636A8F42B74B6720084CD0A /* GitHubAPIClient.swift */,
 				B69AD34C2B77A5F50051CC84 /* URLSessionExtension.swift */,
 				B69AD3712B7A1A2D0051CC84 /* ImageCacheFactory.swift */,
+				B69AD35B2B78BE6F0051CC84 /* UITestContext.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -185,7 +186,6 @@
 			children = (
 				BFD945DE244DC5E80012785A /* AppDelegate.swift */,
 				BFD945E0244DC5E80012785A /* SceneDelegate.swift */,
-				B69AD35B2B78BE6F0051CC84 /* UITestContext.swift */,
 			);
 			path = Global;
 			sourceTree = "<group>";
