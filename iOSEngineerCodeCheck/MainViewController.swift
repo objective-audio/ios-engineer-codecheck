@@ -35,8 +35,9 @@ class MainViewController: UITableViewController {
         searchBar.placeholder = "GitHubのリポジトリを検索できるよー"
         searchBar.delegate = self
 
-        presenter.contentsPublisher.sink { [weak self] _ in
+        presenter.contentPublisher.sink { [weak self] _ in
             self?.tableView.reloadData()
+            self?.updateTitle()
         }.store(in: &cancellables)
     }
 
@@ -46,7 +47,7 @@ class MainViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return presenter.contents.count
+        return presenter.content.cellContents.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath)
@@ -54,12 +55,13 @@ class MainViewController: UITableViewController {
     {
         let cell = UITableViewCell()
 
-        if indexPath.row < presenter.contents.count {
-            let contents = presenter.contents[indexPath.row]
+        let cellContents = presenter.content.cellContents
+        if indexPath.row < cellContents.count {
+            let cellContent = cellContents[indexPath.row]
 
             var configuration = cell.defaultContentConfiguration()
-            configuration.text = contents.fullName
-            configuration.secondaryText = contents.language
+            configuration.text = cellContent.fullName
+            configuration.secondaryText = cellContent.language
             cell.contentConfiguration = configuration
 
             cell.tag = indexPath.row
@@ -71,6 +73,10 @@ class MainViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         controller.showDetail(at: indexPath.row)
     }
+
+    private func updateTitle() {
+        title = presenter.content.message.text
+    }
 }
 
 extension MainViewController: UISearchBarDelegate {
@@ -80,5 +86,22 @@ extension MainViewController: UISearchBarDelegate {
 
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         controller.search(word: searchBar.text ?? "")
+    }
+}
+
+extension MainMessage {
+    fileprivate var text: String? {
+        switch self {
+        case .waiting:
+            "Search GitHub Repository"
+        case .loading:
+            "Loading..."
+        case .failed:
+            "Load failed"
+        case .loaded:
+            "Loaded"
+        case .cancelled:
+            "Cancelled"
+        }
     }
 }

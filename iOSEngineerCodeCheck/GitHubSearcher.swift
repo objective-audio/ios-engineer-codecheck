@@ -30,9 +30,13 @@ final class GitHubSearcher {
         let task = Task {
             do {
                 let repositories = try await apiClient.searchRepositories(word: word)
-                state = .loaded(repositories)
+                if !state.isCancelled {
+                    state = .loaded(repositories)
+                }
             } catch {
-                state = .failed(error, state.repositories)
+                if !state.isCancelled {
+                    state = .failed(error, state.repositories)
+                }
             }
         }
 
@@ -40,7 +44,14 @@ final class GitHubSearcher {
     }
 
     func cancel() {
+        state = .cancelled(state.repositories)
         state.task?.cancel()
-        state = .loaded(state.repositories)
+    }
+}
+
+extension GitHubSearcherState {
+    fileprivate var isCancelled: Bool {
+        guard case .cancelled = self else { return false }
+        return true
     }
 }
