@@ -7,11 +7,7 @@ private actor URLSessionSuccessMock: URLSessionForGitHubAPIClient {
 
     func data(for url: URL) async throws -> Data {
         receivedURL = url
-
-        let jsonUrl = Bundle(for: Self.self).url(
-            forResource: "github-repositories", withExtension: "json")!
-        let json = try String(contentsOf: jsonUrl, encoding: .utf8)
-        return json.data(using: .utf8)!
+        return TestData.repositoriesJsonData
     }
 }
 

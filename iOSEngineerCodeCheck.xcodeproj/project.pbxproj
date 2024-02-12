@@ -14,7 +14,7 @@
 		B636A8FB2B74FB400084CD0A /* ImageCacheState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B636A8FA2B74FB400084CD0A /* ImageCacheState.swift */; };
 		B636A8FD2B74FC5B0084CD0A /* ImageCacheStateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B636A8FC2B74FC5B0084CD0A /* ImageCacheStateTests.swift */; };
 		B636A8FF2B75006C0084CD0A /* ImageCacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B636A8FE2B75006C0084CD0A /* ImageCacheTests.swift */; };
-		B636A9012B7506920084CD0A /* TestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B636A9002B7506920084CD0A /* TestError.swift */; };
+		B636A9012B7506920084CD0A /* TestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B636A9002B7506920084CD0A /* TestData.swift */; };
 		B636A9072B766A320084CD0A /* GitHubRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B636A9062B766A320084CD0A /* GitHubRepositoryTests.swift */; };
 		B636A90D2B76F40B0084CD0A /* GitHubSearcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = B636A90C2B76F40B0084CD0A /* GitHubSearcher.swift */; };
 		B636A90F2B76FA9C0084CD0A /* GitHubSearcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B636A90E2B76FA9C0084CD0A /* GitHubSearcherTests.swift */; };
@@ -38,6 +38,7 @@
 		B69AD36A2B790E4E0051CC84 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69AD3692B790E4E0051CC84 /* DetailViewController.swift */; };
 		B69AD36C2B79B56A0051CC84 /* Detail.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69AD36B2B79B56A0051CC84 /* Detail.swift */; };
 		B69AD3722B7A1A2D0051CC84 /* ImageCacheFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69AD3712B7A1A2D0051CC84 /* ImageCacheFactory.swift */; };
+		B6A608632B7A544300CFB526 /* TestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A608622B7A544300CFB526 /* TestError.swift */; };
 		BFD945DF244DC5E80012785A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD945DE244DC5E80012785A /* AppDelegate.swift */; };
 		BFD945E1244DC5E80012785A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD945E0244DC5E80012785A /* SceneDelegate.swift */; };
 		BFD945E3244DC5E80012785A /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD945E2244DC5E80012785A /* MainViewController.swift */; };
@@ -73,7 +74,7 @@
 		B636A8FA2B74FB400084CD0A /* ImageCacheState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheState.swift; sourceTree = "<group>"; };
 		B636A8FC2B74FC5B0084CD0A /* ImageCacheStateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheStateTests.swift; sourceTree = "<group>"; };
 		B636A8FE2B75006C0084CD0A /* ImageCacheTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheTests.swift; sourceTree = "<group>"; };
-		B636A9002B7506920084CD0A /* TestError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestError.swift; sourceTree = "<group>"; };
+		B636A9002B7506920084CD0A /* TestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestData.swift; sourceTree = "<group>"; };
 		B636A9062B766A320084CD0A /* GitHubRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubRepositoryTests.swift; sourceTree = "<group>"; };
 		B636A90C2B76F40B0084CD0A /* GitHubSearcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubSearcher.swift; sourceTree = "<group>"; };
 		B636A90E2B76FA9C0084CD0A /* GitHubSearcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubSearcherTests.swift; sourceTree = "<group>"; };
@@ -97,6 +98,7 @@
 		B69AD3692B790E4E0051CC84 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		B69AD36B2B79B56A0051CC84 /* Detail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Detail.swift; sourceTree = "<group>"; };
 		B69AD3712B7A1A2D0051CC84 /* ImageCacheFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheFactory.swift; sourceTree = "<group>"; };
+		B6A608622B7A544300CFB526 /* TestError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestError.swift; sourceTree = "<group>"; };
 		BFD945DB244DC5E80012785A /* iOSEngineerCodeCheck.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSEngineerCodeCheck.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFD945DE244DC5E80012785A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BFD945E0244DC5E80012785A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -233,7 +235,8 @@
 				B636A90E2B76FA9C0084CD0A /* GitHubSearcherTests.swift */,
 				B69AD34A2B779B6E0051CC84 /* NavigationRouterTests.swift */,
 				B69AD3502B77A9A20051CC84 /* GitHubAPIClientTests.swift */,
-				B636A9002B7506920084CD0A /* TestError.swift */,
+				B636A9002B7506920084CD0A /* TestData.swift */,
+				B6A608622B7A544300CFB526 /* TestError.swift */,
 				B636A9122B76FC0F0084CD0A /* GitHubRepositoryExtension.swift */,
 				B69AD34E2B77A9450051CC84 /* github-repositories.json */,
 				BFD945F7244DC5EB0012785A /* Info.plist */,
@@ -439,9 +442,10 @@
 				B69AD34B2B779B6E0051CC84 /* NavigationRouterTests.swift in Sources */,
 				B636A9132B76FC0F0084CD0A /* GitHubRepositoryExtension.swift in Sources */,
 				B636A9072B766A320084CD0A /* GitHubRepositoryTests.swift in Sources */,
+				B6A608632B7A544300CFB526 /* TestError.swift in Sources */,
 				B636A8FF2B75006C0084CD0A /* ImageCacheTests.swift in Sources */,
 				B69AD3512B77A9A20051CC84 /* GitHubAPIClientTests.swift in Sources */,
-				B636A9012B7506920084CD0A /* TestError.swift in Sources */,
+				B636A9012B7506920084CD0A /* TestData.swift in Sources */,
 				B636A90F2B76FA9C0084CD0A /* GitHubSearcherTests.swift in Sources */,
 				B636A8FD2B74FC5B0084CD0A /* ImageCacheStateTests.swift in Sources */,
 			);

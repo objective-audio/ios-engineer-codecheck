@@ -41,7 +41,7 @@ final class ImageCacheTests: XCTestCase {
     }
 
     func test_ロードが成功してimageが返る() throws {
-        let imageCache = ImageCache(downloader: DownloaderMock(result: .success(testImage)))
+        let imageCache = ImageCache(downloader: DownloaderMock(result: .success(TestData.image)))
 
         var receivedStates: [ImageCacheState] = []
         let expectation = XCTestExpectation(description: "loaded")
@@ -60,7 +60,7 @@ final class ImageCacheTests: XCTestCase {
             XCTAssertTrue(receivedStates[0].isMatch(.initial))
         }
 
-        imageCache.load(url: testImageUrl)
+        imageCache.load(url: TestData.imageUrl)
 
         self.wait(for: [expectation], timeout: 10.0)
 
@@ -94,7 +94,7 @@ final class ImageCacheTests: XCTestCase {
             XCTAssertTrue(receivedStates[0].isMatch(.initial))
         }
 
-        imageCache.load(url: testImageUrl)
+        imageCache.load(url: TestData.imageUrl)
 
         self.wait(for: [expectation], timeout: 10.0)
 

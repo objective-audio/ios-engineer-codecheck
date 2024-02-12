@@ -11,8 +11,8 @@ final class ImageCacheStateTests: XCTestCase {
 
     func test_image() throws {
         XCTContext.runActivity(named: "loadedで保持しているimageが返る") { _ in
-            XCTAssertEqual(ImageCacheState.loaded(testImage).image, testImage)
-            XCTAssertNotEqual(ImageCacheState.loaded(testImage).image, testOtherImage)
+            XCTAssertEqual(ImageCacheState.loaded(TestData.image).image, TestData.image)
+            XCTAssertNotEqual(ImageCacheState.loaded(TestData.image).image, TestData.otherImage)
         }
 
         XCTContext.runActivity(named: "loaded以外はnilを返す") { _ in
@@ -30,7 +30,7 @@ final class ImageCacheStateTests: XCTestCase {
 
         XCTContext.runActivity(named: "読み込み中か成功状態なら読み込み不可") { _ in
             XCTAssertFalse(ImageCacheState.loading.canLoad)
-            XCTAssertFalse(ImageCacheState.loaded(testImage).canLoad)
+            XCTAssertFalse(ImageCacheState.loaded(TestData.image).canLoad)
         }
     }
 }
