@@ -5,7 +5,7 @@ protocol URLSessionForGitHubAPIClient {
 }
 
 actor GitHubAPIClient: GitHubAPIClientForSearcher {
-    enum FetchError: Error {
+    enum SearchError: Error {
         case makeUrlFailed
     }
 
@@ -20,7 +20,7 @@ actor GitHubAPIClient: GitHubAPIClientForSearcher {
         components.queryItems = [.init(name: "q", value: word)]
 
         guard let url = components.url else {
-            throw FetchError.makeUrlFailed
+            throw SearchError.makeUrlFailed
         }
 
         let data = try await urlSession.data(for: url)
