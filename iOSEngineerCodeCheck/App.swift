@@ -5,11 +5,17 @@ final class App {
     static let shared: App = .init(uiTestContext: .environmentValue)
 
     private let uiTestContext: UITestContext?
-    let router: NavigationRouter = .init()
+    let imageCacheFactory: ImageCacheFactory
+    let router: NavigationRouter
     let searcher: GitHubSearcher
 
     init(uiTestContext: UITestContext?) {
         self.uiTestContext = uiTestContext
+
+        let imageCacheFactory = ImageCacheFactory(isTest: uiTestContext != nil)
+        self.imageCacheFactory = imageCacheFactory
+
+        router = .init(imageCacheFactory: imageCacheFactory)
 
         if let uiTestContext {
             self.searcher = .init(
@@ -19,9 +25,8 @@ final class App {
         }
     }
 
-    func makeImageCache() -> ImageCache {
-        let downloader: DownloaderForImageCache =
-            App.shared.uiTestContext == nil ? ImageDownloader() : ImageDownloaderUITestMock()
-        return ImageCache(downloader: downloader)
+    var detail: Detail? {
+        guard case let .detail(detail) = router.state else { return nil }
+        return detail
     }
 }

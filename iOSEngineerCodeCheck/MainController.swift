@@ -23,6 +23,6 @@ final class MainController {
     }
 
     func showDetail(at index: Int) {
-        router.showDetail(.init(repositoryIndex: index))
+        router.showDetail(repositoryIndex: index)
     }
 }
