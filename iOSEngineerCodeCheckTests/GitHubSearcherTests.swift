@@ -58,7 +58,7 @@ final class GitHubSearcherTests: XCTestCase {
         let searcher = GitHubSearcher(apiClient: apiClient)
 
         var received: [GitHubSearcherState] = []
-        let expectation = XCTestExpectation(description: "fetched")
+        let expectation = XCTestExpectation(description: "searched")
 
         let canceller = searcher.statePublisher.sink { state in
             received.append(state)
