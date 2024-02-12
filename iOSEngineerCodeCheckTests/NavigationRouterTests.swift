@@ -2,6 +2,7 @@ import XCTest
 
 @testable import iOSEngineerCodeCheck
 
+@MainActor
 final class NavigationRouterTests: XCTestCase {
     override func setUpWithError() throws {
     }
@@ -10,12 +11,13 @@ final class NavigationRouterTests: XCTestCase {
     }
 
     func test_遷移() {
-        let router = NavigationRouter()
+        let factory = ImageCacheFactory(isTest: true)
+        let router = NavigationRouter(imageCacheFactory: factory)
 
         XCTAssertEqual(router.elements, [.main])
 
         XCTContext.runActivity(named: "Mainが表示される前はDetailに遷移できない") { _ in
-            router.showDetail(.init(repositoryIndex: 0))
+            router.showDetail(repositoryIndex: 0)
 
             XCTAssertEqual(router.elements, [.main])
         }
@@ -25,7 +27,7 @@ final class NavigationRouterTests: XCTestCase {
 
             XCTAssertEqual(router.elements, [.main])
 
-            router.showDetail(.init(repositoryIndex: 1))
+            router.showDetail(repositoryIndex: 1)
 
             XCTAssertEqual(
                 router.elements,
@@ -33,7 +35,7 @@ final class NavigationRouterTests: XCTestCase {
         }
 
         XCTContext.runActivity(named: "Detail表示中は重複して遷移できない") { _ in
-            router.showDetail(.init(repositoryIndex: 2))
+            router.showDetail(repositoryIndex: 2)
 
             XCTAssertEqual(
                 router.elements,
@@ -47,7 +49,7 @@ final class NavigationRouterTests: XCTestCase {
         }
 
         XCTContext.runActivity(named: "Mainに戻ったらDetailに遷移できる") { _ in
-            router.showDetail(.init(repositoryIndex: 3))
+            router.showDetail(repositoryIndex: 3)
 
             XCTAssertEqual(
                 router.elements,
@@ -56,7 +58,8 @@ final class NavigationRouterTests: XCTestCase {
     }
 
     func test_elementsの購読() {
-        let router = NavigationRouter()
+        let factory = ImageCacheFactory(isTest: true)
+        let router = NavigationRouter(imageCacheFactory: factory)
 
         var received: [[NavigationElement]] = []
 
@@ -76,7 +79,7 @@ final class NavigationRouterTests: XCTestCase {
         }
 
         XCTContext.runActivity(named: "詳細画面が表示される・detailが追加") { _ in
-            router.showDetail(.init(repositoryIndex: 0))
+            router.showDetail(repositoryIndex: 0)
 
             XCTAssertEqual(received.count, 2)
             XCTAssertEqual(
