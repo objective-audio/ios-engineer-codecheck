@@ -7,13 +7,23 @@ struct DetailView: View {
 
     var body: some View {
         List {
-            if let image = presenter.image {
-                Image(uiImage: image)
-                    .resizable()
-                    .aspectRatio(1.0, contentMode: .fit)
-                    .listRowSeparator(.hidden)
-                    .padding(.bottom)
+            Group {
+                if let image = presenter.image {
+                    Image(uiImage: image)
+                        .resizable()
+                        .aspectRatio(1.0, contentMode: .fit)
+                } else {
+                    ZStack {
+                        Color(uiColor: .quaternarySystemFill)
+                            .aspectRatio(1.0, contentMode: .fill)
+                        Text("Not Found")
+                            .foregroundStyle(.tertiary)
+                            .layoutPriority(-1)
+                    }
+                }
             }
+            .listRowSeparator(.hidden)
+            .padding(.bottom)
             Text(repository.fullName ?? "")
                 .font(.title)
                 .frame(maxWidth: .infinity, alignment: .center)
