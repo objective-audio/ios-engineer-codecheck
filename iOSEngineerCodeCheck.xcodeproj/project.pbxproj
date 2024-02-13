@@ -39,6 +39,7 @@
 		B69AD36C2B79B56A0051CC84 /* Detail.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69AD36B2B79B56A0051CC84 /* Detail.swift */; };
 		B69AD3722B7A1A2D0051CC84 /* ImageCacheFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69AD3712B7A1A2D0051CC84 /* ImageCacheFactory.swift */; };
 		B6A608632B7A544300CFB526 /* TestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A608622B7A544300CFB526 /* TestError.swift */; };
+		B6A608652B7B829B00CFB526 /* DetailImageContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A608642B7B829B00CFB526 /* DetailImageContent.swift */; };
 		BFD945DF244DC5E80012785A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD945DE244DC5E80012785A /* AppDelegate.swift */; };
 		BFD945E1244DC5E80012785A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD945E0244DC5E80012785A /* SceneDelegate.swift */; };
 		BFD945E3244DC5E80012785A /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD945E2244DC5E80012785A /* MainViewController.swift */; };
@@ -99,6 +100,7 @@
 		B69AD36B2B79B56A0051CC84 /* Detail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Detail.swift; sourceTree = "<group>"; };
 		B69AD3712B7A1A2D0051CC84 /* ImageCacheFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheFactory.swift; sourceTree = "<group>"; };
 		B6A608622B7A544300CFB526 /* TestError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestError.swift; sourceTree = "<group>"; };
+		B6A608642B7B829B00CFB526 /* DetailImageContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailImageContent.swift; sourceTree = "<group>"; };
 		BFD945DB244DC5E80012785A /* iOSEngineerCodeCheck.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSEngineerCodeCheck.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFD945DE244DC5E80012785A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BFD945E0244DC5E80012785A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -174,6 +176,7 @@
 				B69AD3692B790E4E0051CC84 /* DetailViewController.swift */,
 				B69AD3652B7904980051CC84 /* DetailView.swift */,
 				B69AD3672B7909560051CC84 /* DetailPresenter.swift */,
+				B6A608642B7B829B00CFB526 /* DetailImageContent.swift */,
 				B636A8F82B74F3730084CD0A /* ImageCache.swift */,
 				B636A8FA2B74FB400084CD0A /* ImageCacheState.swift */,
 				B636A8F22B74AA9A0084CD0A /* ImageDownloader.swift */,
@@ -429,6 +432,7 @@
 				B69AD3552B7854050051CC84 /* MainPresenter.swift in Sources */,
 				B636A8F32B74AA9A0084CD0A /* ImageDownloader.swift in Sources */,
 				B636A9192B77560A0084CD0A /* NavigationRouter.swift in Sources */,
+				B6A608652B7B829B00CFB526 /* DetailImageContent.swift in Sources */,
 				B636A8FB2B74FB400084CD0A /* ImageCacheState.swift in Sources */,
 				B69AD36C2B79B56A0051CC84 /* Detail.swift in Sources */,
 				BFD945E1244DC5E80012785A /* SceneDelegate.swift in Sources */,
