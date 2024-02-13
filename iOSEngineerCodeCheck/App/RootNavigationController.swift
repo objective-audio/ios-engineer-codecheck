@@ -35,8 +35,8 @@ class RootNavigationController: UINavigationController {
         switch element {
         case .main:
             MainViewController.make()
-        case let .detail(detail):
-            DetailViewController.make(repositoryIndex: detail.repositoryIndex)
+        case let .detail(repositoryIndex):
+            DetailViewController.make(repositoryIndex: repositoryIndex)
         }
     }
 }
