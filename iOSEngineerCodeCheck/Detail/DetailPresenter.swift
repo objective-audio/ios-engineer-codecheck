@@ -13,8 +13,6 @@ final class DetailPresenter: ObservableObject {
 
     @Published var imageContent: DetailImageContent = .message(.loading)
 
-    private var cancellables: Set<AnyCancellable> = []
-
     init(repository: GitHubRepository, imageCache: ImageCacheForPresenter) {
         self.repository = repository
 
