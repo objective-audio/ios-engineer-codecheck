@@ -7,6 +7,8 @@ protocol ImageCacheForPresenter {
     func load(url: URL)
 }
 
+/// Detail画面に必要なデータを変換して提供するクラス
+
 @MainActor
 final class DetailPresenter: ObservableObject {
     let repository: GitHubRepository

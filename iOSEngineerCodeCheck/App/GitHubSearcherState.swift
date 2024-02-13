@@ -1,5 +1,7 @@
 import Foundation
 
+/// 検索の状態
+
 enum GitHubSearcherState {
     case initial
     case loading(Task<Void, Never>, [GitHubRepository])

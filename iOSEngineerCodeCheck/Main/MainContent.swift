@@ -1,5 +1,7 @@
 import Foundation
 
+/// Main画面表示用のデータ
+
 struct MainContent {
     let cellContents: [MainCellContent]
     let message: MainMessage

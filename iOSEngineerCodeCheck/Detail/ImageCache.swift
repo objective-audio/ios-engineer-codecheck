@@ -7,6 +7,9 @@ protocol DownloaderForImageCache {
     func download(from url: URL) async throws -> UIImage
 }
 
+/// Detail画面で表示する画像を取得して保持する
+/// 非同期の通信をラップして、データの取得状態をプロパティで取得できるようにしています
+
 final class ImageCache: ImageCacheForPresenter {
     private let downloader: DownloaderForImageCache
     private let stateSubject: CurrentValueSubject<ImageCacheState, Never> = .init(.initial)

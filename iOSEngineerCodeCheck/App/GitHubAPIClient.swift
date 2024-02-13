@@ -4,6 +4,9 @@ protocol URLSessionForGitHubAPIClient {
     func data(for url: URL) async throws -> Data
 }
 
+/// GitHub APIの通信を行うクラス
+/// 通信処理をラップし、Structで定義されたリポジトリのデータに変換します
+
 actor GitHubAPIClient: GitHubAPIClientForSearcher {
     enum SearchError: Error {
         case makeUrlFailed

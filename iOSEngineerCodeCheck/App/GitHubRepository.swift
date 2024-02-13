@@ -1,5 +1,7 @@
 import Foundation
 
+// サーバーから取得したGitHubリポジトリのデータ
+
 struct GitHubRepositories: Decodable {
     let items: [GitHubRepository]
 }
