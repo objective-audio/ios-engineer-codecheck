@@ -1,10 +1,6 @@
 import Combine
 import Foundation
 
-struct NavigationDetail: Equatable {
-    let repositoryIndex: Int
-}
-
 enum NavigationRouterState {
     case initial
     case main
@@ -13,7 +9,7 @@ enum NavigationRouterState {
 
 enum NavigationElement: Equatable {
     case main
-    case detail(NavigationDetail)
+    case detail(repositoryIndex: Int)
 }
 
 @MainActor
@@ -57,7 +53,7 @@ extension NavigationRouterState {
         case .initial, .main:
             [.main]
         case let .detail(detail):
-            [.main, .detail(.init(repositoryIndex: detail.repositoryIndex))]
+            [.main, .detail(repositoryIndex: detail.repositoryIndex)]
         }
     }
 }

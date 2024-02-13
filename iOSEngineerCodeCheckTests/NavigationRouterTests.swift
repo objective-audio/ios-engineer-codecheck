@@ -31,7 +31,7 @@ final class NavigationRouterTests: XCTestCase {
 
             XCTAssertEqual(
                 router.elements,
-                [.main, .detail(.init(repositoryIndex: 1))])
+                [.main, .detail(repositoryIndex: 1)])
         }
 
         XCTContext.runActivity(named: "Detail表示中は重複して遷移できない") { _ in
@@ -39,7 +39,7 @@ final class NavigationRouterTests: XCTestCase {
 
             XCTAssertEqual(
                 router.elements,
-                [.main, .detail(.init(repositoryIndex: 1))])
+                [.main, .detail(repositoryIndex: 1)])
         }
 
         XCTContext.runActivity(named: "Detail表示中にMainに戻る") { _ in
@@ -53,7 +53,7 @@ final class NavigationRouterTests: XCTestCase {
 
             XCTAssertEqual(
                 router.elements,
-                [.main, .detail(.init(repositoryIndex: 3))])
+                [.main, .detail(repositoryIndex: 3)])
         }
     }
 
@@ -84,7 +84,7 @@ final class NavigationRouterTests: XCTestCase {
             XCTAssertEqual(received.count, 2)
             XCTAssertEqual(
                 received[1],
-                [.main, .detail(.init(repositoryIndex: 0))])
+                [.main, .detail(repositoryIndex: 0)])
         }
 
         XCTContext.runActivity(named: "メイン画面に戻る・detailが削除") { _ in
