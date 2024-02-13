@@ -53,19 +53,18 @@ class MainViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath)
         -> UITableViewCell
     {
-        let cell = UITableViewCell()
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Repository", for: indexPath)
+
+        var configuration = cell.defaultContentConfiguration()
 
         let cellContents = presenter.content.cellContents
         if indexPath.row < cellContents.count {
             let cellContent = cellContents[indexPath.row]
-
-            var configuration = cell.defaultContentConfiguration()
             configuration.text = cellContent.fullName
             configuration.secondaryText = cellContent.language
-            cell.contentConfiguration = configuration
-
-            cell.tag = indexPath.row
         }
+
+        cell.contentConfiguration = configuration
 
         return cell
     }
