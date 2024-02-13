@@ -1,5 +1,8 @@
 import Foundation
 
+/// Main画面からのアクションをハンドリングするクラス
+/// あまりVCやPresenterから分けるほどのことはやっていませんが、とりあえず分けています
+
 @MainActor
 final class MainController {
     private unowned let router: NavigationRouter

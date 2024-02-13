@@ -5,6 +5,9 @@ protocol GitHubAPIClientForSearcher {
     func searchRepositories(word: String) async throws -> [GitHubRepository]
 }
 
+/// GitHubのリポジトリを検索するクラス
+/// 非同期の通信をラップして、データの取得状態をプロパティで取得できるようにしています
+
 @MainActor
 final class GitHubSearcher {
     private let apiClient: GitHubAPIClientForSearcher
@@ -30,10 +33,13 @@ final class GitHubSearcher {
         let task = Task {
             do {
                 let repositories = try await apiClient.searchRepositories(word: word)
+
+                // キャンセルされていたらレスポンスが返ってきても無視する
                 if !state.isCancelled {
                     state = .loaded(repositories)
                 }
             } catch {
+                // キャンセルされていたらエラーが返ってきても無視する
                 if !state.isCancelled {
                     state = .failed(error, state.repositories)
                 }

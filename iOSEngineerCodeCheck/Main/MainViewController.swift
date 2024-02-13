@@ -1,6 +1,8 @@
 import Combine
 import UIKit
 
+/// GitHubリポジトリの検索を行うMain画面
+
 class MainViewController: UITableViewController {
     @IBOutlet weak var searchBar: UISearchBar!
 

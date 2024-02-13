@@ -12,6 +12,10 @@ enum NavigationElement: Equatable {
     case detail(repositoryIndex: Int)
 }
 
+/// ナビゲーションの遷移を管理するクラス
+/// Viewに依存せず、ナビゲーションの状態を配列で保持して管理します
+/// Main画面がアクティブな時だけDetail画面に遷移できるように制限しています
+
 @MainActor
 final class NavigationRouter {
     private unowned let imageCacheFactory: ImageCacheFactory
@@ -38,6 +42,7 @@ final class NavigationRouter {
     }
 
     func showDetail(repositoryIndex: Int) {
+        // Main画面表示中しかDetail画面には遷移できない
         guard case .main = stateSubject.value else {
             return
         }

@@ -1,5 +1,7 @@
 import Foundation
 
+/// UIテストのためにテスト側からアプリ側で渡すデータ
+
 struct UITestContext: Codable {
     let repositories: [GitHubRepository]
 }

@@ -1,6 +1,8 @@
 import Combine
 import Foundation
 
+/// Main画面に必要なデータを変換して提供するクラス
+
 @MainActor
 final class MainPresenter {
     private unowned let searcher: GitHubSearcher
@@ -17,6 +19,8 @@ final class MainPresenter {
     init(searcher: GitHubSearcher) {
         self.searcher = searcher
 
+        // 30件程度なのでメインスレッドでデータの変換を行っていますが、
+        // 変換が重くなるようであればバックグラウンドで変換するためのオブジェクトをさらに一層挟み込むことも考えられます
         searcher.statePublisher.map(\.mainContent).subscribe(contentSubject).store(
             in: &cancellables)
     }

@@ -2,6 +2,9 @@ import Foundation
 
 import class UIKit.UIImage
 
+/// 画像取得の通信を行うクラス
+/// 通信処理をラップし、UIImageに変換して返します
+
 actor ImageDownloader: DownloaderForImageCache {
     enum DownloadError: Error {
         case dataConvertFailed

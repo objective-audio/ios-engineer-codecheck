@@ -1,6 +1,8 @@
 import Combine
 import SwiftUI
 
+/// 個別のGitHubリポジトリの詳細を表示するDetail画面
+
 struct DetailView: View {
     @ObservedObject var presenter: DetailPresenter
     var repository: GitHubRepository { presenter.repository }

@@ -1,5 +1,9 @@
 import Foundation
 
+/// アプリ全体で扱うオブジェクトを保持するクラス
+/// アプリで唯一存在するシングルトン
+/// UIテストで実行される時には、各オブジェクトにモックするデータを渡せるようにしています
+
 @MainActor
 final class App {
     static let shared: App = .init(uiTestContext: .environmentValue)
