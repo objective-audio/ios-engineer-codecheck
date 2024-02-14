@@ -76,7 +76,7 @@ class MainViewController: UITableViewController {
     }
 
     private func updateTitle() {
-        title = presenter.content.message.text
+        title = presenter.content.message.title
     }
 }
 
@@ -91,7 +91,7 @@ extension MainViewController: UISearchBarDelegate {
 }
 
 extension MainMessage {
-    fileprivate var text: String {
+    fileprivate var title: String {
         switch self {
         case .waiting:
             Localized.Main.Title.waiting
