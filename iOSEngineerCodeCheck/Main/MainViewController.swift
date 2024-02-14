@@ -34,7 +34,7 @@ class MainViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        searchBar.placeholder = "GitHubのリポジトリを検索できるよー"
+        searchBar.placeholder = Localized.Main.searchPlaceholder
         searchBar.delegate = self
 
         presenter.contentPublisher.sink { [weak self] _ in
@@ -91,18 +91,18 @@ extension MainViewController: UISearchBarDelegate {
 }
 
 extension MainMessage {
-    fileprivate var text: String? {
+    fileprivate var text: String {
         switch self {
         case .waiting:
-            "Search GitHub Repository"
+            Localized.Main.Title.waiting
         case .loading:
-            "Loading..."
+            Localized.Main.Title.loading
         case .failed:
-            "Load failed"
+            Localized.Main.Title.failed
         case .loaded:
-            "Loaded"
+            Localized.Main.Title.loaded
         case .cancelled:
-            "Cancelled"
+            Localized.Main.Title.cancelled
         }
     }
 }

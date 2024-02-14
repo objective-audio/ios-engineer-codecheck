@@ -34,19 +34,19 @@ struct DetailView: View {
                 .padding(.vertical)
             HStack {
                 VStack {
-                    Text("Written in \(repository.language ?? "")")
+                    Text(Localized.Detail.language(repository.language ?? ""))
                         .font(.headline)
                     Spacer()
                 }
                 Spacer()
                 VStack(alignment: .trailing, spacing: 16) {
-                    Text("\(repository.stargazersCount ?? 0) stars")
+                    Text(Localized.Detail.starsCount(repository.stargazersCount ?? 0))
                         .font(.subheadline)
-                    Text("\(repository.watchersCount ?? 0) watchers")
+                    Text(Localized.Detail.watchersCount(repository.watchersCount ?? 0))
                         .font(.subheadline)
-                    Text("\(repository.forksCount ?? 0) forks")
+                    Text(Localized.Detail.forksCount(repository.forksCount ?? 0))
                         .font(.subheadline)
-                    Text("\(repository.openIssuesCount ?? 0) open issues")
+                    Text(Localized.Detail.openIssuesCount(repository.openIssuesCount ?? 0))
                         .font(.subheadline)
                     Spacer()
                 }
