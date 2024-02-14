@@ -9,6 +9,7 @@
     }
   ],
   "defaultOptions" : {
+    "language" : "en",
     "targetForVariableExpansion" : {
       "containerPath" : "container:iOSEngineerCodeCheck.xcodeproj",
       "identifier" : "BFD945DA244DC5E80012785A",

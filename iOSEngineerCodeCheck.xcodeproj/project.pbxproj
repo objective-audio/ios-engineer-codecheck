@@ -40,6 +40,8 @@
 		B69AD3722B7A1A2D0051CC84 /* ImageCacheFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69AD3712B7A1A2D0051CC84 /* ImageCacheFactory.swift */; };
 		B6A608632B7A544300CFB526 /* TestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A608622B7A544300CFB526 /* TestError.swift */; };
 		B6A608652B7B829B00CFB526 /* DetailImageContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A608642B7B829B00CFB526 /* DetailImageContent.swift */; };
+		B6ABF12E2B7CD2590019D7B3 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = B6ABF12D2B7CD2590019D7B3 /* Localizable.xcstrings */; };
+		B6ABF1302B7CD2690019D7B3 /* Localized.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6ABF12F2B7CD2690019D7B3 /* Localized.swift */; };
 		BFD945DF244DC5E80012785A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD945DE244DC5E80012785A /* AppDelegate.swift */; };
 		BFD945E1244DC5E80012785A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD945E0244DC5E80012785A /* SceneDelegate.swift */; };
 		BFD945E3244DC5E80012785A /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD945E2244DC5E80012785A /* MainViewController.swift */; };
@@ -101,6 +103,8 @@
 		B69AD3712B7A1A2D0051CC84 /* ImageCacheFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheFactory.swift; sourceTree = "<group>"; };
 		B6A608622B7A544300CFB526 /* TestError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestError.swift; sourceTree = "<group>"; };
 		B6A608642B7B829B00CFB526 /* DetailImageContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailImageContent.swift; sourceTree = "<group>"; };
+		B6ABF12D2B7CD2590019D7B3 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		B6ABF12F2B7CD2690019D7B3 /* Localized.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localized.swift; sourceTree = "<group>"; };
 		BFD945DB244DC5E80012785A /* iOSEngineerCodeCheck.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSEngineerCodeCheck.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFD945DE244DC5E80012785A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BFD945E0244DC5E80012785A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -189,6 +193,8 @@
 			children = (
 				BFD945DE244DC5E80012785A /* AppDelegate.swift */,
 				BFD945E0244DC5E80012785A /* SceneDelegate.swift */,
+				B6ABF12D2B7CD2590019D7B3 /* Localizable.xcstrings */,
+				B6ABF12F2B7CD2690019D7B3 /* Localized.swift */,
 			);
 			path = Global;
 			sourceTree = "<group>";
@@ -345,6 +351,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ja,
 			);
 			mainGroup = BFD945D2244DC5E80012785A;
 			productRefGroup = BFD945DC244DC5E80012785A /* Products */;
@@ -365,6 +372,7 @@
 			files = (
 				BFD945EB244DC5EB0012785A /* LaunchScreen.storyboard in Resources */,
 				BFD945E8244DC5EB0012785A /* Assets.xcassets in Resources */,
+				B6ABF12E2B7CD2590019D7B3 /* Localizable.xcstrings in Resources */,
 				BFD945E6244DC5E80012785A /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -432,6 +440,7 @@
 				B69AD3552B7854050051CC84 /* MainPresenter.swift in Sources */,
 				B636A8F32B74AA9A0084CD0A /* ImageDownloader.swift in Sources */,
 				B636A9192B77560A0084CD0A /* NavigationRouter.swift in Sources */,
+				B6ABF1302B7CD2690019D7B3 /* Localized.swift in Sources */,
 				B6A608652B7B829B00CFB526 /* DetailImageContent.swift in Sources */,
 				B636A8FB2B74FB400084CD0A /* ImageCacheState.swift in Sources */,
 				B69AD36C2B79B56A0051CC84 /* Detail.swift in Sources */,
@@ -552,11 +561,13 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -607,10 +618,12 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
 			};
